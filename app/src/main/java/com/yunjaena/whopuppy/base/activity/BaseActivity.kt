@@ -10,4 +10,11 @@ open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
+    override fun onDestroy() {
+        if (!compositeDisposable.isDisposed)
+            compositeDisposable.dispose()
+
+        super.onDestroy()
+    }
 }
