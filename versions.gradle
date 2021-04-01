@@ -35,7 +35,8 @@ ext {
     retrofit = "com.squareup.retrofit2:retrofit:$retrofit_version"
     retrofitMoshiConvert = "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     retrofitGsonConvert = "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    retrofitRxJava = "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    retrofitRxJava = "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
+    retrofitScalarsConverter = "com.squareup.retrofit2:converter-scalars:$retrofit_version"
 
     /* Dependency - leakcanary */
     def leakcanary_version = "1.6.3"
@@ -53,13 +54,26 @@ ext {
     okhttp = "com.squareup.okhttp3:okhttp:$okhttp_version"
     okhttpLogging = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
-    def rxKotlin_version = "3.0.1"
+    def rxKotlin_version = "3.0.0"
     rxkotlin = "io.reactivex.rxjava3:rxkotlin:$rxKotlin_version"
+    rxandroid = "io.reactivex.rxjava3:rxandroid:$rxKotlin_version"
 
     /* Dependency - lottie */
     def lottie_verison = "3.4.2"
     lottie = "com.airbnb.android:lottie:$lottie_verison"
 
     def pretty_logger_version = "2.2.0"
-    prettyLogger =  "com.orhanobut:logger:$pretty_logger_version"
+    prettyLogger = "com.orhanobut:logger:$pretty_logger_version"
+
+    // Current version
+    def koin_version = "3.0.1-beta-2"
+
+    koinCore = "io.insert-koin:koin-core:$koin_version"
+    koinAndroid = "io.insert-koin:koin-android:$koin_version"
+    koinAndroidExtension = "io.insert-koin:koin-android-ext:$koin_version"
+    koinWorkManager = "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    koinTest = "io.insert-koin:koin-test:$koin_version"
+
+    def hawk_version = "2.0.1"
+    hawk =  "com.orhanobut:hawk:$hawk_version"
 }

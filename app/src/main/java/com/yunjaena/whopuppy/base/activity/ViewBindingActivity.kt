@@ -1,4 +1,3 @@
-
 package com.yunjaena.whopuppy.base.activity
 
 import android.os.Bundle
@@ -17,7 +16,7 @@ abstract class ViewBindingActivity<T : ViewDataBinding> : BaseActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         binding.unbind()
+        super.onDestroy()
     }
 }

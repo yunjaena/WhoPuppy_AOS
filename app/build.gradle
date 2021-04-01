@@ -66,6 +66,7 @@ dependencies {
     implementation project.retrofitGsonConvert
     implementation project.retrofitRxJava
     implementation project.retrofitMoshiConvert
+    implementation project.retrofitScalarsConverter
 
     /* Dependency - leakcanary */
     debugImplementation project.leakcanaryDebug
@@ -82,10 +83,21 @@ dependencies {
 
     /* Dependency - rxkotlin */
     implementation(project.rxkotlin)
+    implementation project.rxandroid
 
     /* Dependency - lottie */
     implementation project.lottie
 
-    /*Dependency - Pretty Logger*/
+    /* Dependency - Pretty Logger */
     implementation project.prettyLogger
+
+    /* Dependency - Koin */
+    implementation project.koinCore
+    implementation project.koinAndroid
+    implementation project.koinAndroidExtension
+    implementation project.koinWorkManager
+    testImplementation project.koinTest
+
+    /* Dependency - Hawk */
+    implementation project.hawk
 }
