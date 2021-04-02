@@ -1,4 +1,4 @@
-package com.yunjaena.whopuppy.base.constant
+package com.yunjaena.whopuppy.constant
 
 const val URL = "URL"
 const val NO_AUTH = "NO_AUTH"
