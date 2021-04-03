@@ -1,16 +1,16 @@
-package com.yunjaena.whopuppy.base.di
+package com.yunjaena.whopuppy.di
 
 import com.orhanobut.hawk.Hawk
 import com.orhanobut.logger.Logger
 import com.yunjaena.whopuppy.BuildConfig
-import com.yunjaena.whopuppy.base.constant.ACCESS_TOKEN
-import com.yunjaena.whopuppy.base.constant.AUTH
-import com.yunjaena.whopuppy.base.constant.NO_AUTH
-import com.yunjaena.whopuppy.base.constant.REFRESH_AUTH
-import com.yunjaena.whopuppy.base.constant.REFRESH_TOKEN
-import com.yunjaena.whopuppy.base.constant.URL
-import com.yunjaena.whopuppy.base.network.AuthApi
-import com.yunjaena.whopuppy.base.network.NoAuthApi
+import com.yunjaena.whopuppy.constant.ACCESS_TOKEN
+import com.yunjaena.whopuppy.constant.AUTH
+import com.yunjaena.whopuppy.constant.NO_AUTH
+import com.yunjaena.whopuppy.constant.REFRESH_AUTH
+import com.yunjaena.whopuppy.constant.REFRESH_TOKEN
+import com.yunjaena.whopuppy.constant.URL
+import com.yunjaena.whopuppy.network.AuthApi
+import com.yunjaena.whopuppy.network.NoAuthApi
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
