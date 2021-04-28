@@ -65,7 +65,7 @@ ext {
     def pretty_logger_version = "2.2.0"
     prettyLogger = "com.orhanobut:logger:$pretty_logger_version"
 
-    // Current version
+    /* Dependency - koin */
     def koin_version = "3.0.1-beta-2"
 
     koinCore = "io.insert-koin:koin-core:$koin_version"
@@ -74,6 +74,13 @@ ext {
     koinWorkManager = "io.insert-koin:koin-androidx-workmanager:$koin_version"
     koinTest = "io.insert-koin:koin-test:$koin_version"
 
+    /* Dependency - hawk */
     def hawk_version = "2.0.1"
     hawk =  "com.orhanobut:hawk:$hawk_version"
+
+    /* Dependency - SMS Verification */
+    def play_service_auth_version = "17.0.0"
+    playServiceAuth = "com.google.android.gms:play-services-auth:$play_service_auth_version"
+    def play_service_auth_api_phone_version = "17.4.0"
+    playServiceAuthApiPhone = "com.google.android.gms:play-services-auth-api-phone:$play_service_auth_api_phone_version"
 }

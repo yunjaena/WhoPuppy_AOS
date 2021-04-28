@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">WhoPuppy</string>
+    <string name="who_puppy_name">내가 누구개</string>
+
+    <!--로그인-->
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">로그인</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="id">아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="nick_name">닉네임</string>
+    <string name="find_password"><u>비밀번호 찾기></u></string>
+    <string name="login">로그인</string>
+    <string name="sign_up">회원가입</string>
+    <string name="confirm">확인</string>
+    <string name="verify">인증</string>
+    <string name="phone_number_hint">휴대폰번호 (01012345678)</string>
+    <string name="phone_number_secret">인증번호</string>
+    <string name="sign_up_reset_alert">입력하신 내용이 사라집니다.\n정말로 뒤로 가시겠습니까?</string>
+    <string name="yes">네</string>
+    <string name="no">아니오</string>
+    <string name="password_input_error">비밀번호는 특수문자랑 영어 숫자 조합 8글자 이상이어야 합니다.</string>
+
 </resources>
