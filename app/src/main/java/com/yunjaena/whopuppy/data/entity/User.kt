@@ -6,5 +6,6 @@ data class User(
     @SerializedName("account") val account: String? = null,
     @SerializedName("nickname") val nickname: String? = null,
     @SerializedName("password") val password: String? = null,
-    @SerializedName("phone_number") val phoneNumber: String? = null
+    @SerializedName("phone_number") val phoneNumber: String? = null,
+    @SerializedName("secret") val secret: String? = null
 )
