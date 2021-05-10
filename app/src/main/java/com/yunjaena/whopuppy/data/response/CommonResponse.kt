@@ -37,3 +37,7 @@ fun Throwable.toCommonResponse(): CommonResponse? {
         null
     }
 }
+
+fun String.errorTextPrettyFormat(): String {
+    return this.replace("[", "").replace("]", "\n")
+}
