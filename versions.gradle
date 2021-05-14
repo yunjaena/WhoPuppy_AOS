@@ -12,6 +12,9 @@ ext {
     def androidx_recyclerview_version = "1.1.0"
     androidxRecyclerView = "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
 
+    def androidx_activity_version = "1.2.0"
+    androidxActivity = "androidx.activity:activity-ktx:$androidx_activity_version"
+
     def androidx_fragment_version = "1.2.5"
     androidxFragment = "androidx.fragment:fragment-ktx:$androidx_fragment_version"
 
