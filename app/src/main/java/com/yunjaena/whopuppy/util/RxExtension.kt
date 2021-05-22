@@ -1,5 +1,6 @@
 package com.yunjaena.whopuppy.util
 
+import android.text.TextWatcher
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import com.orhanobut.logger.Logger
@@ -7,6 +8,7 @@ import com.yunjaena.whopuppy.base.viewmodel.ViewModelBase
 import com.yunjaena.whopuppy.data.UserRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.CompletableTransformer
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableEmitter
 import io.reactivex.rxjava3.core.Single
@@ -25,14 +27,26 @@ fun <T> Single<T>.handleUpdateAccessToken(): Single<T> {
     return this.compose(retryOnNotAuthorized<T>())
 }
 
-// TODO : 공통 HttpException 처리
 fun <T> Single<T>.handleHttpException(): Single<T> {
     return this.handleUpdateAccessToken()
         .doOnError {
-            if (it !is HttpException) return@doOnError
-            Logger.e("handle http exception : ${it.code()}")
-            when (it.code()) {
-            }
+            handleHttpException(it)
+        }
+}
+
+fun Completable.withThread(): Completable {
+    return this.subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+}
+
+fun Completable.handleUpdateAccessToken(): Completable {
+    return this.compose(retryOnNotAuthorized())
+}
+
+fun Completable.handleHttpException(): Completable {
+    return this.handleUpdateAccessToken()
+        .doOnError {
+            handleHttpException(it)
         }
 }
 
@@ -48,7 +62,7 @@ fun <T> Single<T>.handleProgress(viewModel: ViewModelBase): Single<T> {
         .doOnDispose { viewModel.isLoading.postValue(false) }
 }
 
-fun <T> Completable.handleProgress(viewModel: ViewModelBase): Completable {
+fun Completable.handleProgress(viewModel: ViewModelBase): Completable {
     return this.doOnSubscribe { viewModel.isLoading.postValue(true) }
         .doOnError { viewModel.isLoading.postValue(false) }
         .doOnComplete { viewModel.isLoading.postValue(false) }
@@ -71,12 +85,42 @@ private fun <T> retryOnNotAuthorized(): SingleTransformer<T, T> {
     }
 }
 
+private fun retryOnNotAuthorized(): CompletableTransformer {
+    return CompletableTransformer { upstream ->
+        upstream.onErrorResumeNext { throwable ->
+            if (throwable is HttpException && throwable.code() == 401) {
+                val userRepository: UserRepository by inject(UserRepository::class.java)
+                userRepository.refreshToken()
+                    .doOnError { error -> Logger.e("token update error : $error") }
+                    .flatMapCompletable {
+                        Completable.complete().andThen(upstream)
+                    }
+            } else
+                Completable.error(throwable)
+        }
+    }
+}
+
+// TODO : 공통 HttpException 처리 (401 => 토큰 만료 또는 잘못된 토큰시 로그인 페이지로 이동)
+private fun handleHttpException(throwable: Throwable) {
+    if (throwable !is HttpException) return
+    Logger.e("handle http exception : ${throwable.code()}")
+    when (throwable.code()) {
+    }
+}
+
 fun EditText.debounce(
     time: Long = 500L,
     timeUnit: TimeUnit = TimeUnit.MILLISECONDS
 ): Observable<String> {
-    return Observable.create { emitter: ObservableEmitter<String>? ->
-        this.addTextChangedListener { emitter?.onNext(it.toString()) }
+    var textWatcher: TextWatcher? = null
+    return Observable.create { emitter: ObservableEmitter<String> ->
+        textWatcher = this.addTextChangedListener {
+            if (this.isFocused)
+                emitter.onNext(it.toString())
+        }
+    }.doOnDispose {
+        this.removeTextChangedListener(textWatcher)
     }.debounce(time, timeUnit)
         .observeOn(AndroidSchedulers.mainThread())
 }
