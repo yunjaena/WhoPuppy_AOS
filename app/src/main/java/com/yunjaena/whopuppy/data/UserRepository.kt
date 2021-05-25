@@ -51,4 +51,8 @@ class UserRepository(
     override fun saveToken(tokenResponse: TokenResponse): Completable {
         return userLocalDataSource.saveToken(tokenResponse)
     }
+
+    override fun changePassword(user: User): Single<CommonResponse> {
+        return userRemoteDataSource.changePassword(user)
+    }
 }

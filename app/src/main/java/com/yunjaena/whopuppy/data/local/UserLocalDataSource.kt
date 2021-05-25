@@ -65,4 +65,8 @@ class UserLocalDataSource : UserDataSource {
             it.onComplete()
         }
     }
+
+    override fun changePassword(user: User): Single<CommonResponse> {
+        return Single.never()
+    }
 }
