@@ -19,11 +19,12 @@ ext {
     androidxFragment = "androidx.fragment:fragment-ktx:$androidx_fragment_version"
 
     /* Dependency - AndroidX Navigation */
-    def androidx_navigation_version = "2.3.2"
+    def androidx_navigation_version = "2.3.5"
     androidxNavigation = "androidx.navigation:navigation-fragment:$androidx_navigation_version"
     androidxNavigationUi = "androidx.navigation:navigation-ui:$androidx_navigation_version"
     androidxNavgationKtx = "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
     androidxNavgationFragment = "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version"
+    androidxNavigationPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$androidx_navigation_version"
 
     def androidx_material_version = "1.2.1"
     androidxMaterial = "com.google.android.material:material:$androidx_material_version"
