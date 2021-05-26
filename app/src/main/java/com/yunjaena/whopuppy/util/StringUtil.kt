@@ -3,7 +3,7 @@ package com.yunjaena.whopuppy.util
 import java.security.DigestException
 import java.security.MessageDigest
 
-fun String.toSha256(): String? {
+fun String.toSha256(): String {
     val hash: ByteArray
     try {
         val md = MessageDigest.getInstance("SHA-256")
