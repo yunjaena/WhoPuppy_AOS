@@ -1,5 +1,6 @@
 package com.yunjaena.whopuppy.viewmodel
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yunjaena.whopuppy.R
@@ -15,7 +16,9 @@ import com.yunjaena.whopuppy.util.SingleLiveEvent
 import com.yunjaena.whopuppy.util.handleHttpException
 import com.yunjaena.whopuppy.util.handleProgress
 import com.yunjaena.whopuppy.util.isPasswordValid
+import com.yunjaena.whopuppy.util.toSha256
 import com.yunjaena.whopuppy.util.withThread
+import io.reactivex.rxjava3.kotlin.addTo
 
 class SignUpViewModel(
     private val userRepository: UserRepository
@@ -41,7 +44,7 @@ class SignUpViewModel(
     private var _passwordCheckErrorText: MutableLiveData<Int?> = MutableLiveData(null)
     private var _passwordCheckStatus = MutableLiveData(ProgressStatus.STOP)
 
-    val phoneNumberStatusMessage = SingleLiveEvent<@androidx.annotation.StringRes Int?>()
+    val phoneNumberStatusMessage = SingleLiveEvent<@StringRes Int?>()
     val phoneNumberCheckErrorText: LiveData<String?>
         get() = _phoneNumberErrorText
     val phoneNumberStatus: LiveData<ProgressStatus>
@@ -53,7 +56,7 @@ class SignUpViewModel(
         get() = _secretCodeErrorText
     val secretCodeStatus: LiveData<ProgressStatus>
         get() = _secretCodeStatus
-    val secretCodeStatusMessage = SingleLiveEvent<@androidx.annotation.StringRes Int?>()
+    val secretCodeStatusMessage = SingleLiveEvent<@StringRes Int?>()
     private var _secretCodeErrorText: MutableLiveData<String?> = MutableLiveData(null)
     private var _secretCodeStatus = MutableLiveData(ProgressStatus.STOP)
 
@@ -77,7 +80,7 @@ class SignUpViewModel(
                     _accountCheckErrorText.value = response.errorMessage
                 }
                 _accountCheckStatus.value = ProgressStatus.FAIL
-            }
+            }.addTo(compositeDisposable)
     }
 
     fun checkNickNameValid(nickName: String) {
@@ -97,7 +100,7 @@ class SignUpViewModel(
                     _nickNameCheckErrorText.value = response.errorMessage
                 }
                 _nickNameCheckStatus.value = ProgressStatus.FAIL
-            }
+            }.addTo(compositeDisposable)
     }
 
     fun checkPasswordValid(password: String) {
@@ -137,7 +140,7 @@ class SignUpViewModel(
                     _phoneNumberErrorText.value = response.errorMessage
                 }
                 _phoneNumberStatus.value = ProgressStatus.FAIL
-            }
+            }.addTo(compositeDisposable)
     }
 
     fun checkSecretCode(phoneNumber: String, code: String) {
@@ -164,11 +167,12 @@ class SignUpViewModel(
                     _secretCodeErrorText.value = response.errorMessage
                 }
                 _secretCodeStatus.value = ProgressStatus.FAIL
-            }
+            }.addTo(compositeDisposable)
     }
 
     fun signUp(user: User) {
-        userRepository.signUp(user)
+        val currentUser = user.copy(password = user.password?.toSha256())
+        userRepository.signUp(currentUser)
             .handleHttpException()
             .handleProgress(this)
             .withThread()
@@ -178,7 +182,7 @@ class SignUpViewModel(
                 it.toCommonResponse()?.also { response ->
                     signUpErrorMessage.value = response.errorMessage?.errorTextPrettyFormat()
                 }
-            }
+            }.addTo(compositeDisposable)
     }
 
     companion object {
