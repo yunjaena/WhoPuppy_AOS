@@ -26,12 +26,13 @@ fun AlertDialog.hideProgressDialog() {
 fun Context.showAlertDialog(
     title: String,
     message: String,
-    positiveButtonText: Int,
+    positiveButtonText: String,
     positiveCallback: (DialogInterface) -> Unit
 ) {
     val alertDialog = AlertDialog.Builder(this).apply {
         setTitle(title)
         setMessage(message)
+        setCancelable(false)
         setPositiveButton(positiveButtonText) { dialog, _ ->
             positiveCallback.invoke(dialog)
         }
