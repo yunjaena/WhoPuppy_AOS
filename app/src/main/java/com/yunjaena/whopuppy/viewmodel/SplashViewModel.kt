@@ -3,14 +3,23 @@ package com.yunjaena.whopuppy.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yunjaena.whopuppy.base.viewmodel.ViewModelBase
+import com.yunjaena.whopuppy.data.UserRepository
+import com.yunjaena.whopuppy.util.withThread
 
-class SplashViewModel : ViewModelBase() {
+class SplashViewModel(
+    private val userRepository: UserRepository
+) : ViewModelBase() {
     val isLoginSuccess: LiveData<Boolean>
         get() = _isLoginSuccess
     private var _isLoginSuccess = MutableLiveData<Boolean>()
 
     fun checkAutoLogin() {
-        // TODO -> 자동 로그인 로직 구현
-        _isLoginSuccess.value = false
+        userRepository.refreshToken()
+            .withThread()
+            .subscribe({
+                _isLoginSuccess.value = true
+            }) {
+                _isLoginSuccess.value = false
+            }
     }
 }

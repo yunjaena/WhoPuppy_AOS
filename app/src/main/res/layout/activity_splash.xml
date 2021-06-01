@@ -7,6 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:background="@color/secondaryColor">
 
         <com.airbnb.lottie.LottieAnimationView
@@ -23,7 +24,6 @@
             app:lottie_loop="true">
 
         </com.airbnb.lottie.LottieAnimationView>
-
 
 
         <ImageView

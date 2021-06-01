@@ -4,7 +4,6 @@ import android.app.Application
 import com.orhanobut.hawk.Hawk
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.yunjaena.whopuppy.di.dataSourceModule
 import com.yunjaena.whopuppy.di.netWorkModule
 import com.yunjaena.whopuppy.di.repositoryModule
 import com.yunjaena.whopuppy.di.viewModelModule
@@ -25,7 +24,6 @@ class WhoPuppyApplication : Application() {
         startKoin {
             androidContext(this@WhoPuppyApplication)
             modules(netWorkModule)
-            modules(dataSourceModule)
             modules(repositoryModule)
             modules(viewModelModule)
         }
