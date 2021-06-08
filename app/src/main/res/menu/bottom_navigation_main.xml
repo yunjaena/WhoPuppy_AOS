@@ -2,26 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_one"
+        android:id="@+id/action_home"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
+
     <item
-        android:id="@+id/action_two"
+        android:id="@+id/action_board"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_note_alt"
         android:title="@string/board" />
 
     <item
-        android:id="@+id/action_three"
+        android:id="@+id/action_chat"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
         android:title="@string/chatting" />
 
     <item
-        android:id="@+id/action_four"
+        android:id="@+id/action_my_page"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:icon="@drawable/ic_person"
