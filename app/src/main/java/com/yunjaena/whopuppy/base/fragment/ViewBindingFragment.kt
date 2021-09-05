@@ -26,7 +26,8 @@ abstract class ViewBindingFragment<T : ViewDataBinding> : BaseFragment() {
     }
 
     override fun onDestroy() {
-        binding.unbind()
+        if (::_binding.isInitialized)
+            binding.unbind()
         super.onDestroy()
     }
 }

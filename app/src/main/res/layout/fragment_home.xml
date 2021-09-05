@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:id="@+id/home_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_line_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_line_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="20dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/find_dog_breed_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_end"
+                app:layout_constraintStart_toStartOf="@id/guide_line_start"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/find_dog_breed_image_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_dog_find_breed"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/find_dog_breed_info_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center"
+                        android:text="@string/find_breed_info"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/find_dog_breed_image_view" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/find_dog_breed_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/secondaryColor"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/find_dog_breed_info_text_view">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/secondaryColor"
+                            android:padding="10dp"
+                            android:text="@string/go_to_find_breed_menu"
+                            android:textColor="@color/secondaryTextColor" />
+                    </androidx.cardview.widget.CardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/menu_board_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/board"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_start"
+                app:layout_constraintTop_toBottomOf="@id/find_dog_breed_container" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rehome_dog_board_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/secondaryColor"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_end"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_start"
+                app:layout_constraintTop_toBottomOf="@+id/menu_board_text_view">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/rehome_dog_board_image_view"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_brown_dog"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/rehome_dog_title_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/rehome_dog"
+                        android:textColor="@color/primaryTextColor"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/rehome_dog_content_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/rehome_dog_search_image_view"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@id/rehome_dog_board_image_view"
+                        app:layout_constraintTop_toTopOf="@+id/rehome_dog_board_image_view" />
+
+                    <TextView
+                        android:id="@+id/rehome_dog_content_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/register_rehome_dog"
+                        android:textColor="@color/primaryTextColor"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/rehome_dog_board_image_view"
+                        app:layout_constraintEnd_toStartOf="@+id/rehome_dog_search_image_view"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@id/rehome_dog_board_image_view"
+                        app:layout_constraintTop_toBottomOf="@+id/rehome_dog_title_text_view" />
+
+                    <ImageView
+                        android:id="@+id/rehome_dog_search_image_view"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_search"
+                        app:layout_constraintBottom_toBottomOf="@+id/rehome_dog_board_image_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rehome_dog_content_text_view"
+                        app:layout_constraintTop_toTopOf="@id/rehome_dog_board_image_view"
+                        app:tint="@color/primaryColor" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/adopt_dog_board_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/secondaryColor"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_end"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_start"
+                app:layout_constraintTop_toBottomOf="@+id/rehome_dog_board_container">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/adopt_dog_board_image_view"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_dog_with_human"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/adopt_dog_title_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/want_adopt_dog"
+                        android:textColor="@color/primaryTextColor"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/adopt_dog_content_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/adopt_dog_search_image_view"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@id/adopt_dog_board_image_view"
+                        app:layout_constraintTop_toTopOf="@+id/adopt_dog_board_image_view" />
+
+                    <TextView
+                        android:id="@+id/adopt_dog_content_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/find_adopt_dog"
+                        android:textColor="@color/primaryTextColor"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/adopt_dog_board_image_view"
+                        app:layout_constraintEnd_toStartOf="@+id/adopt_dog_search_image_view"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@id/adopt_dog_board_image_view"
+                        app:layout_constraintTop_toBottomOf="@+id/adopt_dog_title_text_view" />
+
+                    <ImageView
+                        android:id="@+id/adopt_dog_search_image_view"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_search"
+                        app:layout_constraintBottom_toBottomOf="@+id/adopt_dog_board_image_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/adopt_dog_content_text_view"
+                        app:layout_constraintTop_toTopOf="@id/adopt_dog_board_image_view"
+                        app:tint="@color/primaryColor" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/adopt_dog_review_board_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/secondaryColor"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_end"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_start"
+                app:layout_constraintTop_toBottomOf="@+id/adopt_dog_board_container">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/adopt_dog_review_board_image_view"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_adopt_review"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/adopt_dog_review_title_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/adopt_review"
+                        android:textColor="@color/primaryTextColor"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/adopt_dog_review_content_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/adopt_dog_review_search_image_view"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@id/adopt_dog_review_board_image_view"
+                        app:layout_constraintTop_toTopOf="@+id/adopt_dog_review_board_image_view" />
+
+                    <TextView
+                        android:id="@+id/adopt_dog_review_content_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/find_adopt_review"
+                        android:textColor="@color/primaryTextColor"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/adopt_dog_review_board_image_view"
+                        app:layout_constraintEnd_toStartOf="@+id/adopt_dog_review_search_image_view"
+                        app:layout_constraintStart_toEndOf="@id/adopt_dog_review_board_image_view"
+                        app:layout_constraintTop_toBottomOf="@+id/adopt_dog_review_title_text_view" />
+
+                    <ImageView
+                        android:id="@+id/adopt_dog_review_search_image_view"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_search"
+                        app:layout_constraintBottom_toBottomOf="@+id/adopt_dog_review_board_image_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/adopt_dog_review_content_text_view"
+                        app:layout_constraintTop_toTopOf="@id/adopt_dog_review_board_image_view"
+                        app:tint="@color/primaryColor" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/abandoned_dog_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/abandoned_dog"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_start"
+                app:layout_constraintTop_toBottomOf="@id/adopt_dog_review_board_container" />
+
+            <ImageView
+                android:id="@+id/show_more_abandoned_dog_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintTop_toTopOf="@id/abandoned_dog_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/abandoned_dog_text_view"
+                app:layout_constraintStart_toEndOf="@id/abandoned_dog_text_view"
+                app:layout_constraintDimensionRatio="1:1"
+                android:src="@drawable/ic_brown_arrow"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/abandoned_dog_recycler_view"
+                android:layout_width="0dp"
+                tools:listitem="@layout/item_home_abandoned_dog"
+                app:layout_constraintTop_toBottomOf="@id/abandoned_dog_text_view"
+                app:layout_constraintStart_toStartOf="@id/guide_line_start"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import com.yunjaena.whopuppy.R
+import com.yunjaena.whopuppy.WhoPuppyApplication
 
 fun Context.showProgressDialog(userDim: Boolean = true): AlertDialog {
     val builder: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -45,3 +46,14 @@ fun Context.showAlertDialog(
     }
     dialog.show()
 }
+
+fun Int.dpToPx() = this.toFloat().dpToPx()
+
+fun Float.dpToPx() = (this / getDensity()).toInt()
+
+fun Int.pxToDp() = this.toFloat().pxToDp()
+
+fun Float.pxToDp() = (this * getDensity()).toInt()
+
+private fun getDensity() =
+    WhoPuppyApplication.instance.applicationContext.resources.displayMetrics.density
