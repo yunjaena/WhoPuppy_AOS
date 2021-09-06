@@ -11,7 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WhoPuppy">
+        android:theme="@style/Theme.WhoPuppy"
+        android:usesCleartextTraffic="true">
+
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.WhoPuppy.FullScreen">
@@ -32,6 +34,9 @@
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
         <activity
             android:name=".activity.FindPasswordActivity"
+            android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
+        <activity
+            android:name=".activity.AbandonedDogSearchActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
     </application>
 

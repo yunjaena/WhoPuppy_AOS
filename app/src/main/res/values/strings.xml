@@ -20,7 +20,6 @@
     <string name="find_password_under_line"><u>비밀번호 찾기</u></string>
     <string name="login">로그인</string>
     <string name="sign_up">회원가입</string>
-    <string name="confirm">확인</string>
     <string name="verify">인증</string>
     <string name="phone_number_hint">휴대폰번호 (01012345678)</string>
     <string name="phone_number_secret">인증번호</string>
@@ -51,4 +50,12 @@
     <string name="adopt_review">분양 후기</string>
     <string name="find_adopt_review">다양한 사례를 확인해보세요.</string>
     <string name="abandoned_dog">유기견</string>
+    <string name="input_dog_kind">품종을 입력해주세요.</string>
+    <string name="sex">성별</string>
+    <string name="male">남</string>
+    <string name="female">여</string>
+    <string name="neutral">중성</string>
+    <string name="all">전체</string>
+    <string name="area">지역</string>
+    <string name="confirm">확인</string>
 </resources>

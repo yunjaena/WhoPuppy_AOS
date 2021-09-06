@@ -1,13 +1,18 @@
 package com.yunjaena.whopuppy.api
 
+import com.yunjaena.whopuppy.data.entity.AbandonedDog
+import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
 import com.yunjaena.whopuppy.data.entity.AuthNumber
 import com.yunjaena.whopuppy.data.entity.User
 import com.yunjaena.whopuppy.data.response.CommonResponse
 import com.yunjaena.whopuppy.data.response.TokenResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface NoAuthApi {
     @POST("/user/account")
@@ -30,4 +35,16 @@ interface NoAuthApi {
 
     @POST("/user/sign-up")
     fun signUp(@Body user: User): Single<CommonResponse>
+
+    @GET("/animal")
+    fun getAnimal(
+        @Query("kindCd") kindCd: String?,
+        @Query("limit") limit: Int?,
+        @Query("noticeNo") noticeNo: String?,
+        @Query("page") page: Int?,
+        @Query("sexCd") sexCd: String?
+    ): Single<AbandonedDog>
+
+    @GET("/animal/{idx}")
+    fun getAnimalDetail(@Path("idx") idx: Long): Single<AbandonedDogItem>
 }

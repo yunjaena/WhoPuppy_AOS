@@ -9,7 +9,7 @@ ext {
     def androidx_cardview_version = "1.0.0"
     androidxCardView = "androidx.cardview:cardview:$androidx_cardview_version"
 
-    def androidx_recyclerview_version = "1.1.0"
+    def androidx_recyclerview_version = "1.2.0-alpha02"
     androidxRecyclerView = "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
 
     def androidx_activity_version = "1.2.0"
@@ -80,11 +80,15 @@ ext {
 
     /* Dependency - hawk */
     def hawk_version = "2.0.1"
-    hawk =  "com.orhanobut:hawk:$hawk_version"
+    hawk = "com.orhanobut:hawk:$hawk_version"
 
     /* Dependency - SMS Verification */
     def play_service_auth_version = "17.0.0"
     playServiceAuth = "com.google.android.gms:play-services-auth:$play_service_auth_version"
     def play_service_auth_api_phone_version = "17.4.0"
     playServiceAuthApiPhone = "com.google.android.gms:play-services-auth-api-phone:$play_service_auth_api_phone_version"
+
+    /* Dependency - Paginate */
+    def paginate_version = "1.0.0"
+    paginate = "com.github.markomilos:paginate:$paginate_version"
 }

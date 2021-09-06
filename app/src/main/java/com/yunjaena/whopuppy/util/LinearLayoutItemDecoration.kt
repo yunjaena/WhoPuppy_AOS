@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 class LinearLayoutItemDecoration(private val orientation: Int, val space: Rect) :
     RecyclerView.ItemDecoration() {
     lateinit var recyclerView: RecyclerView
+    lateinit var recyclerViewState: RecyclerView.State
     lateinit var currentView: View
     lateinit var currentOutRect: Rect
 
@@ -23,6 +24,7 @@ class LinearLayoutItemDecoration(private val orientation: Int, val space: Rect) 
         recyclerView = parent
         currentView = view
         currentOutRect = outRect
+        recyclerViewState = state
 
         when (orientation) {
             LinearLayout.VERTICAL -> setVerticalSpace()
@@ -36,24 +38,38 @@ class LinearLayoutItemDecoration(private val orientation: Int, val space: Rect) 
     private fun setVerticalSpace() {
         currentOutRect.left = space.left
         currentOutRect.right = space.right
-        currentOutRect.bottom = space.bottom
 
         if (isNotFirstItem()) {
             currentOutRect.top = space.top
+        }
+
+        if (isNotEndPosition()) {
+            currentOutRect.bottom = space.bottom
         }
     }
 
     private fun setHorizontalSpace() {
         currentOutRect.top = space.top
-        currentOutRect.right = space.right
         currentOutRect.bottom = space.bottom
 
         if (isNotFirstItem()) {
             currentOutRect.left = space.left
         }
+
+        if (isNotEndPosition()) {
+            currentOutRect.right = space.right
+        }
     }
 
-    private fun isFirstItem() = recyclerView.getChildAdapterPosition(currentView) == 0
+    private fun itemPosition() = recyclerView.getChildAdapterPosition(currentView)
+
+    private fun isFirstItem() = itemPosition() == 0
 
     private fun isNotFirstItem() = !isFirstItem()
+
+    private fun itemTotalSize() = recyclerViewState.itemCount
+
+    private fun isEndPosition() = itemPosition() == itemTotalSize() - 1
+
+    private fun isNotEndPosition() = !isEndPosition()
 }
