@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.base.fragment.ViewBindingDialogFragment
-import com.yunjaena.whopuppy.databinding.DialogAbandonedDogSortBinding
+import com.yunjaena.whopuppy.databinding.DialogAbandonedAnimalSortBinding
 import com.yunjaena.whopuppy.viewmodel.AbandonedDogSearchViewModel
 import com.yunjaena.whopuppy.viewmodel.Sex
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class AbandonedDogSortDialog : ViewBindingDialogFragment<DialogAbandonedDogSortBinding>() {
-    override val layoutId: Int = R.layout.dialog_abandoned_dog_sort
+class AbandonedDogSortDialog : ViewBindingDialogFragment<DialogAbandonedAnimalSortBinding>() {
+    override val layoutId: Int = R.layout.dialog_abandoned_animal_sort
     private val abandonedDogSearchViewModel: AbandonedDogSearchViewModel by sharedViewModel()
     private var currentSelectSex: Sex = Sex.ALL
 

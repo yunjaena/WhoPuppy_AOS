@@ -49,7 +49,7 @@
     <string name="find_adopt_dog">분양받고 싶은 반려견을 찾아보세요.</string>
     <string name="adopt_review">분양 후기</string>
     <string name="find_adopt_review">다양한 사례를 확인해보세요.</string>
-    <string name="abandoned_dog">유기견</string>
+    <string name="abandoned_animal">유기동물</string>
     <string name="input_dog_kind">품종을 입력해주세요.</string>
     <string name="sex">성별</string>
     <string name="male">남</string>
@@ -58,7 +58,7 @@
     <string name="all">전체</string>
     <string name="area">지역</string>
     <string name="confirm">확인</string>
-    <string name="abandoned_dog_info">유기견 정보</string>
+    <string name="abandoned_animal_info">유기동물 정보</string>
     <string name="phone_number_format">연락처 : %s</string>
     <string name="sex_format">성별 : %s</string>
     <string name="age_format">나이 : %s</string>

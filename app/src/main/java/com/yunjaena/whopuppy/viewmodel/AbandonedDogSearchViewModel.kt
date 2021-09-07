@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yunjaena.whopuppy.base.viewmodel.ViewModelBase
 import com.yunjaena.whopuppy.data.AnimalRepository
-import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimalItem
 import com.yunjaena.whopuppy.data.response.toCommonResponse
 import com.yunjaena.whopuppy.util.SingleLiveEvent
 import com.yunjaena.whopuppy.util.withThread
@@ -16,11 +16,11 @@ class AbandonedDogSearchViewModel(
     val animalSearchQuery: AnimalSearchQuery = AnimalSearchQuery()
     var isEndOfPage: Boolean = false
     var isLoadingPage: Boolean = false
-    val abandonedAnimalList: LiveData<ArrayList<AbandonedDogItem>>
+    val abandonedAnimalList: LiveData<ArrayList<AbandonedAnimalItem>>
         get() = _abandonedAnimalList
-    private val _abandonedAnimalList = MutableLiveData<ArrayList<AbandonedDogItem>>()
+    private val _abandonedAnimalList = MutableLiveData<ArrayList<AbandonedAnimalItem>>()
     val abandonedDogItemFetchFailMessage = SingleLiveEvent<String>()
-    private val animals = ArrayList<AbandonedDogItem>()
+    private val animals = ArrayList<AbandonedAnimalItem>()
 
     init {
         getAnimalList()

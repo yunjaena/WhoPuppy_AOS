@@ -1,7 +1,7 @@
 package com.yunjaena.whopuppy.api
 
-import com.yunjaena.whopuppy.data.entity.AbandonedDog
-import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimal
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimalItem
 import com.yunjaena.whopuppy.data.entity.AuthNumber
 import com.yunjaena.whopuppy.data.entity.User
 import com.yunjaena.whopuppy.data.response.CommonResponse
@@ -43,8 +43,8 @@ interface NoAuthApi {
         @Query("noticeNo") noticeNo: String?,
         @Query("page") page: Int?,
         @Query("sexCd") sexCd: String?
-    ): Single<AbandonedDog>
+    ): Single<AbandonedAnimal>
 
     @GET("/animal/{idx}")
-    fun getAnimalDetail(@Path("idx") idx: Long): Single<AbandonedDogItem>
+    fun getAnimalDetail(@Path("idx") idx: Long): Single<AbandonedAnimalItem>
 }

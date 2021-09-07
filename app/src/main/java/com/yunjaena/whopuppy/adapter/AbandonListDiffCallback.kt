@@ -1,21 +1,21 @@
 package com.yunjaena.whopuppy.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimalItem
 
 class AbandonListDiffCallback(
-    private val oldItemAbandonDogList: ArrayList<AbandonedDogItem>,
-    private val newItemAbandonDogList: ArrayList<AbandonedDogItem>
+    private val oldItemAbandonAnimalList: ArrayList<AbandonedAnimalItem>,
+    private val newItemAbandonAnimalList: ArrayList<AbandonedAnimalItem>
 ) : DiffUtil.Callback() {
-    override fun getOldListSize(): Int = oldItemAbandonDogList.size
+    override fun getOldListSize(): Int = oldItemAbandonAnimalList.size
 
-    override fun getNewListSize(): Int = newItemAbandonDogList.size
+    override fun getNewListSize(): Int = newItemAbandonAnimalList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldItemAbandonDogList[oldItemPosition] == newItemAbandonDogList[newItemPosition]
+        return oldItemAbandonAnimalList[oldItemPosition] == newItemAbandonAnimalList[newItemPosition]
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldItemAbandonDogList[oldItemPosition] == newItemAbandonDogList[newItemPosition]
+        return oldItemAbandonAnimalList[oldItemPosition] == newItemAbandonAnimalList[newItemPosition]
     }
 }

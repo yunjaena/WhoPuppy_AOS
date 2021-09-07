@@ -7,19 +7,19 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.yunjaena.whopuppy.R
-import com.yunjaena.whopuppy.adapter.AbandonDogAdapter
+import com.yunjaena.whopuppy.adapter.AbandonAnimalAdapter
 import com.yunjaena.whopuppy.base.dpToPx
 import com.yunjaena.whopuppy.base.fragment.ViewBindingFragment
 import com.yunjaena.whopuppy.databinding.FragmentHomeBinding
 import com.yunjaena.whopuppy.util.LinearLayoutItemDecoration
-import com.yunjaena.whopuppy.util.goToAbandonedDogActivity
+import com.yunjaena.whopuppy.util.goToAbandonedAnimalActivity
 import com.yunjaena.whopuppy.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
     override val layoutId: Int = R.layout.fragment_home
     private val homeViewModel: HomeViewModel by viewModel()
-    private lateinit var abandonedDogListAdapter: AbandonDogAdapter
+    private lateinit var abandonedAnimalListAdapter: AbandonAnimalAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,30 +32,30 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
     }
 
     private fun initView() {
-        binding.showMoreAbandonedDogImageView.setOnClickListener {
-            requireContext().goToAbandonedDogActivity()
+        binding.showMoreAbandonedAnimalImageView.setOnClickListener {
+            requireContext().goToAbandonedAnimalActivity()
         }
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
-        binding.abandonedDogRecyclerView.addItemDecoration(
+        binding.abandonedAnimalRecyclerView.addItemDecoration(
             LinearLayoutItemDecoration(
                 LinearLayout.HORIZONTAL,
                 Rect(5.dpToPx(), 0.dpToPx(), 5.dpToPx(), 0.dpToPx())
             )
         )
-        abandonedDogListAdapter = AbandonDogAdapter()
-        abandonedDogListAdapter.stateRestorationPolicy =
+        abandonedAnimalListAdapter = AbandonAnimalAdapter()
+        abandonedAnimalListAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        binding.abandonedDogRecyclerView.adapter = abandonedDogListAdapter
+        binding.abandonedAnimalRecyclerView.adapter = abandonedAnimalListAdapter
     }
 
     private fun initObserver() {
         with(homeViewModel) {
             abandonedAnimalList.observe(viewLifecycleOwner) {
                 if (it == null) return@observe
-                abandonedDogListAdapter.updateItem(it)
+                abandonedAnimalListAdapter.updateItem(it)
             }
 
             abandonedDogItemFetchFailMessage.observe(viewLifecycleOwner) {

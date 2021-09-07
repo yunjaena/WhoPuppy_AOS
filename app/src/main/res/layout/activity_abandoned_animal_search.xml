@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.AbandonedDogSearchActivity">
+        tools:context=".activity.AbandonedAnimalSearchActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -60,7 +60,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:spanCount="2"
-            tools:listitem="@layout/item_home_abandoned_dog_list" />
+            tools:listitem="@layout/item_home_abandoned_animal_list" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_button"

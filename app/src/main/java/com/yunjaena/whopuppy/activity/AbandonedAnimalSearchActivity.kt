@@ -5,20 +5,20 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.paginate.Paginate
 import com.yunjaena.whopuppy.R
-import com.yunjaena.whopuppy.adapter.AbandonDogListAdapter
+import com.yunjaena.whopuppy.adapter.AbandonAnimalListAdapter
 import com.yunjaena.whopuppy.base.activity.ViewBindingActivity
 import com.yunjaena.whopuppy.base.dpToPx
 import com.yunjaena.whopuppy.base.hideKeyBoard
-import com.yunjaena.whopuppy.databinding.ActivityAbandonedDogSearchBinding
+import com.yunjaena.whopuppy.databinding.ActivityAbandonedAnimalSearchBinding
 import com.yunjaena.whopuppy.util.GridLayoutItemDecoration
 import com.yunjaena.whopuppy.util.showAbandonedDogSortDialog
 import com.yunjaena.whopuppy.viewmodel.AbandonedDogSearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AbandonedDogSearchActivity : ViewBindingActivity<ActivityAbandonedDogSearchBinding>() {
-    override val layoutId: Int = R.layout.activity_abandoned_dog_search
+class AbandonedAnimalSearchActivity : ViewBindingActivity<ActivityAbandonedAnimalSearchBinding>() {
+    override val layoutId: Int = R.layout.activity_abandoned_animal_search
     private val abandonedDogSearchViewModel: AbandonedDogSearchViewModel by viewModel()
-    private lateinit var abandonDogAdapter: AbandonDogListAdapter
+    private lateinit var abandonAnimalAdapter: AbandonAnimalListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,12 +60,13 @@ class AbandonedDogSearchActivity : ViewBindingActivity<ActivityAbandonedDogSearc
     }
 
     private fun initRecyclerView() {
-        abandonDogAdapter = AbandonDogListAdapter()
-        abandonDogAdapter.stateRestorationPolicy =
+        abandonAnimalAdapter = AbandonAnimalListAdapter()
+        abandonAnimalAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        binding.abandonedDogRecyclerView.adapter = abandonDogAdapter
+        binding.abandonedDogRecyclerView.adapter = abandonAnimalAdapter
         binding.abandonedDogRecyclerView.addItemDecoration(GridLayoutItemDecoration(2, 10.dpToPx()))
-        binding.abandonedDogRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.abandonedDogRecyclerView.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
@@ -116,7 +117,7 @@ class AbandonedDogSearchActivity : ViewBindingActivity<ActivityAbandonedDogSearc
 
     private fun initObserver() {
         abandonedDogSearchViewModel.abandonedAnimalList.observe(this) {
-            abandonDogAdapter.updateItem(it)
+            abandonAnimalAdapter.updateItem(it)
         }
     }
 }

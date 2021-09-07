@@ -35,9 +35,9 @@
             android:name=".activity.FindPasswordActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
         <activity
-            android:name=".activity.AbandonedDogSearchActivity"
+            android:name=".activity.AbandonedAnimalSearchActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
-        <activity android:name=".activity.AbandonedDogDetailActivity" />
+        <activity android:name=".activity.AbandonedAnimalDetailActivity" />
     </application>
 
 </manifest>

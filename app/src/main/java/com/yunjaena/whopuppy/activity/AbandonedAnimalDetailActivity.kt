@@ -6,14 +6,14 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.base.activity.ViewBindingActivity
-import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
-import com.yunjaena.whopuppy.databinding.ActivityAbandonedDogDetailBinding
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimalItem
+import com.yunjaena.whopuppy.databinding.ActivityAbandonedAnimalDetailBinding
 import com.yunjaena.whopuppy.util.showToast
 import com.yunjaena.whopuppy.viewmodel.AbandonedDogDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AbandonedDogDetailActivity : ViewBindingActivity<ActivityAbandonedDogDetailBinding>() {
-    override val layoutId: Int = R.layout.activity_abandoned_dog_detail
+class AbandonedAnimalDetailActivity : ViewBindingActivity<ActivityAbandonedAnimalDetailBinding>() {
+    override val layoutId: Int = R.layout.activity_abandoned_animal_detail
     private val abandonedDogDetailViewModel: AbandonedDogDetailViewModel by viewModel()
     private var index: Long? = null
 
@@ -41,25 +41,25 @@ class AbandonedDogDetailActivity : ViewBindingActivity<ActivityAbandonedDogDetai
     }
 
     private fun setAppBar() {
-        setBaseAppBar(getString(R.string.abandoned_dog_info))
+        setBaseAppBar(getString(R.string.abandoned_animal_info))
         setBackKey()
     }
 
     private fun initObserver() {
         with(abandonedDogDetailViewModel) {
-            animalDetail.observe(this@AbandonedDogDetailActivity) {
+            animalDetail.observe(this@AbandonedAnimalDetailActivity) {
                 initAbandonedDogView(it)
             }
 
-            abandonedDogItemFetchFailMessage.observe(this@AbandonedDogDetailActivity) {
+            abandonedDogItemFetchFailMessage.observe(this@AbandonedAnimalDetailActivity) {
                 if (it != null)
                     showToast(it)
             }
         }
     }
 
-    private fun initAbandonedDogView(abandonedDogItem: AbandonedDogItem) {
-        with(abandonedDogItem) {
+    private fun initAbandonedDogView(abandonedAnimalItem: AbandonedAnimalItem) {
+        with(abandonedAnimalItem) {
             setCallFloatButton(careTel)
             setAnimalImage(popfile)
             setPhoneNumber(careTel)
@@ -87,6 +87,7 @@ class AbandonedDogDetailActivity : ViewBindingActivity<ActivityAbandonedDogDetai
     private fun setAnimalImage(fileUrl: String) {
         Glide.with(this)
             .load(fileUrl)
+            .placeholder(R.drawable.ic_brown_dog)
             .into(binding.animalImageView)
     }
 

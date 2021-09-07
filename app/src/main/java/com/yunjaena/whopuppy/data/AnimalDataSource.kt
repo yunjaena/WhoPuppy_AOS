@@ -1,7 +1,7 @@
 package com.yunjaena.whopuppy.data
 
-import com.yunjaena.whopuppy.data.entity.AbandonedDog
-import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimal
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimalItem
 import io.reactivex.rxjava3.core.Single
 
 interface AnimalDataSource {
@@ -11,7 +11,7 @@ interface AnimalDataSource {
         noticeNo: String?,
         page: Int?,
         sexCd: String?
-    ): Single<AbandonedDog>
+    ): Single<AbandonedAnimal>
 
-    fun getAnimalDetail(index: Long): Single<AbandonedDogItem>
+    fun getAnimalDetail(index: Long): Single<AbandonedAnimalItem>
 }

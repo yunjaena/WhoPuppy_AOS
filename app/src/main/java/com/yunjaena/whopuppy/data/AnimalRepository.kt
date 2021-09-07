@@ -1,7 +1,7 @@
 package com.yunjaena.whopuppy.data
 
-import com.yunjaena.whopuppy.data.entity.AbandonedDog
-import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimal
+import com.yunjaena.whopuppy.data.entity.AbandonedAnimalItem
 import io.reactivex.rxjava3.core.Single
 
 class AnimalRepository(private val animalRemoteDataSource: AnimalDataSource) : AnimalDataSource {
@@ -11,11 +11,11 @@ class AnimalRepository(private val animalRemoteDataSource: AnimalDataSource) : A
         noticeNo: String?,
         page: Int?,
         sexCd: String?
-    ): Single<AbandonedDog> {
+    ): Single<AbandonedAnimal> {
         return animalRemoteDataSource.getAnimalList(kindCd, limit, noticeNo, page, sexCd)
     }
 
-    override fun getAnimalDetail(index: Long): Single<AbandonedDogItem> {
+    override fun getAnimalDetail(index: Long): Single<AbandonedAnimalItem> {
         return animalRemoteDataSource.getAnimalDetail(index)
     }
 }

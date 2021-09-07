@@ -322,11 +322,11 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/abandoned_dog_text_view"
+                android:id="@+id/abandoned_animal_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/abandoned_dog"
+                android:text="@string/abandoned_animal"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -334,23 +334,23 @@
                 app:layout_constraintTop_toBottomOf="@id/adopt_dog_review_board_container" />
 
             <ImageView
-                android:id="@+id/show_more_abandoned_dog_image_view"
+                android:id="@+id/show_more_abandoned_animal_image_view"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                app:layout_constraintTop_toTopOf="@id/abandoned_dog_text_view"
-                app:layout_constraintBottom_toBottomOf="@id/abandoned_dog_text_view"
-                app:layout_constraintStart_toEndOf="@id/abandoned_dog_text_view"
+                app:layout_constraintTop_toTopOf="@id/abandoned_animal_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/abandoned_animal_text_view"
+                app:layout_constraintStart_toEndOf="@id/abandoned_animal_text_view"
                 app:layout_constraintDimensionRatio="1:1"
                 android:src="@drawable/ic_brown_arrow"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/abandoned_dog_recycler_view"
+                android:id="@+id/abandoned_animal_recycler_view"
                 android:layout_width="0dp"
-                tools:listitem="@layout/item_home_abandoned_dog"
-                app:layout_constraintTop_toBottomOf="@id/abandoned_dog_text_view"
+                tools:listitem="@layout/item_home_abandoned_animal"
+                app:layout_constraintTop_toBottomOf="@id/abandoned_animal_text_view"
                 app:layout_constraintStart_toStartOf="@id/guide_line_start"
                 app:layout_constraintEnd_toEndOf="@id/guide_line_end"
                 app:layout_constraintBottom_toBottomOf="parent"
