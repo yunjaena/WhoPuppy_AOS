@@ -36,6 +36,7 @@ class AbandonedAnimalDetailActivity : ViewBindingActivity<ActivityAbandonedAnima
     }
 
     private fun init() {
+        useDefaultLoading(abandonedDogDetailViewModel)
         setAppBar()
         initObserver()
     }

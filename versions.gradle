@@ -91,4 +91,12 @@ ext {
     /* Dependency - Paginate */
     def paginate_version = "1.0.0"
     paginate = "com.github.markomilos:paginate:$paginate_version"
+
+    /* Dependency - Gson */
+    def gson_version = "2.8.8"
+    gson = "com.google.code.gson:gson:$gson_version"
+
+    /* Dependency - ossLicense */
+    def oss_license_version = "17.0.0"
+    ossLicense = "com.google.android.gms:play-services-oss-licenses:$oss_license_version"
 }

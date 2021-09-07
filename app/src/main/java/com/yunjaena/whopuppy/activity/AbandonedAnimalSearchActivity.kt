@@ -65,8 +65,7 @@ class AbandonedAnimalSearchActivity : ViewBindingActivity<ActivityAbandonedAnima
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.abandonedDogRecyclerView.adapter = abandonAnimalAdapter
         binding.abandonedDogRecyclerView.addItemDecoration(GridLayoutItemDecoration(2, 10.dpToPx()))
-        binding.abandonedDogRecyclerView.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
+        binding.abandonedDogRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {

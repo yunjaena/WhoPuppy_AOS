@@ -5,6 +5,7 @@ import com.yunjaena.whopuppy.viewmodel.AbandonedDogSearchViewModel
 import com.yunjaena.whopuppy.viewmodel.FindPasswordViewModel
 import com.yunjaena.whopuppy.viewmodel.HomeViewModel
 import com.yunjaena.whopuppy.viewmodel.LoginViewModel
+import com.yunjaena.whopuppy.viewmodel.MyInfoViewModel
 import com.yunjaena.whopuppy.viewmodel.SignUpViewModel
 import com.yunjaena.whopuppy.viewmodel.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -18,4 +19,5 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { AbandonedDogSearchViewModel(get()) }
     viewModel { AbandonedDogDetailViewModel(get()) }
+    viewModel { MyInfoViewModel(get()) }
 }

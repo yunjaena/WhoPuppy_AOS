@@ -45,9 +45,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun setBackKey() {
-        val backButtonDrawable =
-            ContextCompat.getDrawable(this@BaseActivity, R.drawable.ic_arrow_back_black) ?: return
-        baseAppBar?.setLeftButtonDrawable(backButtonDrawable)
+        baseAppBar?.setLeftButton(R.drawable.ic_arrow_back_black)
         appBarLeftButtonClicked {
             onBackPressed()
         }

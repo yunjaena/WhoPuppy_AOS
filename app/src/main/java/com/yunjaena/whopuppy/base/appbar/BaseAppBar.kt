@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import com.yunjaena.whopuppy.R
@@ -48,21 +49,21 @@ class BaseAppBar(
         titleTextView.text = title
     }
 
-    fun setLeftButtonDrawable(drawable: Drawable) {
+    fun setLeftButton(@DrawableRes resourceId: Int) {
         checkCustomActionbarSet()
         val leftButton = customAppBarView.findViewById<ImageView>(R.id.left_button)
         leftButton.visibility = View.VISIBLE
-        leftButton.background = drawable
+        leftButton.setImageResource(resourceId)
         leftButton.setOnClickListener {
             leftButtonClickListener?.invoke(leftButton)
         }
     }
 
-    fun setRightButtonDrawable(drawable: Drawable) {
+    fun setRightButton(@DrawableRes resourceId: Int) {
         checkCustomActionbarSet()
         val rightButton = customAppBarView.findViewById<ImageView>(R.id.right_button)
         rightButton.visibility = View.VISIBLE
-        rightButton.background = drawable
+        rightButton.setImageResource(resourceId)
         rightButton.setOnClickListener {
             rightButtonClickListener?.invoke(rightButton)
         }

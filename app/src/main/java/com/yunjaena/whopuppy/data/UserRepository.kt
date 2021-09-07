@@ -55,4 +55,12 @@ class UserRepository(
     override fun changePassword(user: User): Single<CommonResponse> {
         return userRemoteDataSource.changePassword(user)
     }
+
+    override fun getUserInfo(): Single<User> {
+        return userRemoteDataSource.getUserInfo()
+    }
+
+    override fun logout(): Completable {
+        return userLocalDataSource.logout()
+    }
 }

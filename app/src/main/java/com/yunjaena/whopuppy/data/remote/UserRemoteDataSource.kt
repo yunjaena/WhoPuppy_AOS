@@ -12,7 +12,8 @@ import io.reactivex.rxjava3.core.Single
 
 class UserRemoteDataSource(
     private val refreshTokenApi: AuthApi,
-    private val noAuthApi: NoAuthApi
+    private val noAuthApi: NoAuthApi,
+    private val authApi: AuthApi
 ) : UserDataSource {
 
     override fun getToken(user: User): Single<TokenResponse> {
@@ -53,5 +54,13 @@ class UserRemoteDataSource(
 
     override fun changePassword(user: User): Single<CommonResponse> {
         return noAuthApi.changePassword(user)
+    }
+
+    override fun getUserInfo(): Single<User> {
+        return authApi.getUserInfo()
+    }
+
+    override fun logout(): Completable {
+        return Completable.never()
     }
 }

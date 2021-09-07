@@ -69,4 +69,17 @@ class UserLocalDataSource : UserDataSource {
     override fun changePassword(user: User): Single<CommonResponse> {
         return Single.never()
     }
+
+    override fun getUserInfo(): Single<User> {
+        return Single.never()
+    }
+
+    override fun logout(): Completable {
+        return Completable.create {
+            if (it.isDisposed) return@create
+            Hawk.delete(ACCESS_TOKEN)
+            Hawk.delete(REFRESH_TOKEN)
+            it.onComplete()
+        }
+    }
 }

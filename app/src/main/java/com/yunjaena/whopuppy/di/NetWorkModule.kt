@@ -13,6 +13,7 @@ import com.yunjaena.whopuppy.constant.REFRESH_AUTH
 import com.yunjaena.whopuppy.constant.REFRESH_TOKEN
 import com.yunjaena.whopuppy.constant.STAGE_SERVER_BASE_URL
 import com.yunjaena.whopuppy.constant.URL
+import com.yunjaena.whopuppy.util.TokenAuthenticator
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,6 +56,7 @@ val netWorkModule = module {
                     .build()
                 chain.proceed(newRequest)
             }
+            authenticator(TokenAuthenticator(get()))
         }.build()
     }
 

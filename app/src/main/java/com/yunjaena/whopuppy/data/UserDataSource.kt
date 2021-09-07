@@ -27,4 +27,8 @@ interface UserDataSource {
     fun saveToken(tokenResponse: TokenResponse): Completable
 
     fun changePassword(user: User): Single<CommonResponse>
+
+    fun getUserInfo(): Single<User>
+
+    fun logout(): Completable
 }
