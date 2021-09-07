@@ -9,6 +9,7 @@ import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.base.recyclerview.BindingViewHolder
 import com.yunjaena.whopuppy.data.entity.AbandonedDogItem
 import com.yunjaena.whopuppy.databinding.ItemHomeAbandonedDogListBinding
+import com.yunjaena.whopuppy.util.goToAbandonedDogDetailActivity
 
 class AbandonDogListAdapter :
     RecyclerView.Adapter<BindingViewHolder<ItemHomeAbandonedDogListBinding>>() {
@@ -42,6 +43,9 @@ class AbandonDogListAdapter :
                 .into(dogImageView)
             dogKindTextView.text = currentItem.kindCd
             dogAgeTextView.text = currentItem.age
+        }
+        holder.itemView.setOnClickListener {
+            holder.itemView.context.goToAbandonedDogDetailActivity(currentItem.idx)
         }
     }
 

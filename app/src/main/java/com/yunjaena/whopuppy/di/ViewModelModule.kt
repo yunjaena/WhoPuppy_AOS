@@ -1,5 +1,6 @@
 package com.yunjaena.whopuppy.di
 
+import com.yunjaena.whopuppy.viewmodel.AbandonedDogDetailViewModel
 import com.yunjaena.whopuppy.viewmodel.AbandonedDogSearchViewModel
 import com.yunjaena.whopuppy.viewmodel.FindPasswordViewModel
 import com.yunjaena.whopuppy.viewmodel.HomeViewModel
@@ -16,4 +17,5 @@ val viewModelModule = module {
     viewModel { FindPasswordViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { AbandonedDogSearchViewModel(get()) }
+    viewModel { AbandonedDogDetailViewModel(get()) }
 }

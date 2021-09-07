@@ -58,4 +58,15 @@
     <string name="all">전체</string>
     <string name="area">지역</string>
     <string name="confirm">확인</string>
+    <string name="abandoned_dog_info">유기견 정보</string>
+    <string name="phone_number_format">연락처 : %s</string>
+    <string name="sex_format">성별 : %s</string>
+    <string name="age_format">나이 : %s</string>
+    <string name="color_format">색깔 : %s</string>
+    <string name="protect_status_format">보호 상태 : %s</string>
+    <string name="protect_place_format">보호 장소 : %s</string>
+    <string name="protect_place_address_format">보호 장소 주소 : %s</string>
+    <string name="animal_status_format">특이사항 : %s</string>
+    <string name="animal_kind_format">종 : %s</string>
+    <string name="wrong_access">잘못된 접근입니다.</string>
 </resources>

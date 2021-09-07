@@ -1,7 +1,7 @@
 package com.yunjaena.whopuppy.data.entity
 
 data class AbandonedDogItem(
-    val idx: Int,
+    val idx: Long,
     val age: String,
     val careAddr: String,
     val careNm: String,

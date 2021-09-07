@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhoPuppy"
         android:usesCleartextTraffic="true">
-
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.WhoPuppy.FullScreen">
@@ -38,6 +37,7 @@
         <activity
             android:name=".activity.AbandonedDogSearchActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
+        <activity android:name=".activity.AbandonedDogDetailActivity" />
     </application>
 
 </manifest>
