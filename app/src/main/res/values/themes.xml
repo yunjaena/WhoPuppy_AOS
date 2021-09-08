@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.WhoPuppy" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
@@ -21,6 +21,13 @@
 
 
     <style name="Theme.WhoPuppy.MaterialComponents" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="android:statusBarColor">@color/primaryDarkColor</item>
+    </style>
+
+    <style name="Theme.WhoPuppy.MaterialComponents.ActionBar" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/secondaryColor</item>

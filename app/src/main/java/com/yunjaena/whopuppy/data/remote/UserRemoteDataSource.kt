@@ -63,4 +63,8 @@ class UserRemoteDataSource(
     override fun logout(): Completable {
         return Completable.never()
     }
+
+    override fun updateNickName(user: User): Single<CommonResponse> {
+        return authApi.updateNickName(user)
+    }
 }

@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.base.appbar.BaseAppBar
 import com.yunjaena.whopuppy.base.hideProgressDialog
@@ -49,6 +48,11 @@ open class BaseActivity : AppCompatActivity() {
         appBarLeftButtonClicked {
             onBackPressed()
         }
+    }
+
+    fun setCheckButton(callback: (View) -> Unit) {
+        baseAppBar?.setRightButton(R.drawable.ic_check)
+        appBarRightButtonClicked(callback)
     }
 
     fun useDefaultLoading(viewModelBase: ViewModelBase, useDim: Boolean = true) {

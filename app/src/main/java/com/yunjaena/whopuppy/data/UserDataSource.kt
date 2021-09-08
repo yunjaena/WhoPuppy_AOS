@@ -31,4 +31,6 @@ interface UserDataSource {
     fun getUserInfo(): Single<User>
 
     fun logout(): Completable
+
+    fun updateNickName(user: User): Single<CommonResponse>
 }

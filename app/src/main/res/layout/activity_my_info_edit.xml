@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.yunjaena.whopuppy.viewmodel.MyInfoEditViewModel" />
+
+        <import type="com.yunjaena.whopuppy.customview.ProgressStatus" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.MyInfoEditActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <TextView
+            android:id="@+id/nick_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/nick_name"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/guide_line_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_nick_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:hint="@string/nick_name"
+            app:errorIconDrawable="@null"
+            app:errorText="@{vm.nickNameCheckErrorText}"
+            app:layout_constraintEnd_toStartOf="@+id/user_nick_name_check_status_animation_view"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@id/guide_line_start"
+            app:layout_constraintTop_toBottomOf="@+id/nick_name_text_view"
+            app:layout_goneMarginEnd="24dp">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_nick_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:selectAllOnFocus="true" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.yunjaena.whopuppy.customview.StatusAnimationView
+            android:id="@+id/user_nick_name_check_status_animation_view"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="@{vm.nickNameCheckStatus != ProgressStatus.STOP ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/user_nick_name"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/guide_line_end"
+            app:layout_constraintStart_toEndOf="@+id/user_nick_name"
+            app:layout_constraintTop_toTopOf="@id/user_nick_name"
+            app:status="@{vm.nickNameCheckStatus}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -38,6 +38,9 @@
             android:name=".activity.AbandonedAnimalSearchActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
         <activity android:name=".activity.AbandonedAnimalDetailActivity" />
+        <activity
+            android:name=".activity.MyInfoEditActivity"
+            android:theme="@style/Theme.WhoPuppy.MaterialComponents.ActionBar" />
     </application>
 
 </manifest>

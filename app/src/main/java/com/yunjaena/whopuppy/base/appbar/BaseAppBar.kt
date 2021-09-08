@@ -1,7 +1,6 @@
 package com.yunjaena.whopuppy.base.appbar
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -10,6 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import com.yunjaena.whopuppy.R
+import com.yunjaena.whopuppy.util.setOnSingleClickListener
 
 class BaseAppBar(
     private val context: Context,
@@ -54,7 +54,7 @@ class BaseAppBar(
         val leftButton = customAppBarView.findViewById<ImageView>(R.id.left_button)
         leftButton.visibility = View.VISIBLE
         leftButton.setImageResource(resourceId)
-        leftButton.setOnClickListener {
+        leftButton.setOnSingleClickListener {
             leftButtonClickListener?.invoke(leftButton)
         }
     }
@@ -64,7 +64,7 @@ class BaseAppBar(
         val rightButton = customAppBarView.findViewById<ImageView>(R.id.right_button)
         rightButton.visibility = View.VISIBLE
         rightButton.setImageResource(resourceId)
-        rightButton.setOnClickListener {
+        rightButton.setOnSingleClickListener {
             rightButtonClickListener?.invoke(rightButton)
         }
     }

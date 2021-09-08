@@ -122,4 +122,7 @@ dependencies {
 
     /* Dependency - ossLicense */
     implementation project.ossLicense
+
+    /*Dependency - eventbus*/
+    implementation project.eventBus
 }

@@ -63,4 +63,8 @@ class UserRepository(
     override fun logout(): Completable {
         return userLocalDataSource.logout()
     }
+
+    override fun updateNickName(user: User): Single<CommonResponse> {
+        return userRemoteDataSource.updateNickName(user)
+    }
 }

@@ -82,4 +82,8 @@ class UserLocalDataSource : UserDataSource {
             it.onComplete()
         }
     }
+
+    override fun updateNickName(user: User): Single<CommonResponse> {
+        return Single.never()
+    }
 }
