@@ -96,11 +96,15 @@ ext {
     def gson_version = "2.8.8"
     gson = "com.google.code.gson:gson:$gson_version"
 
-    /* Dependency - ossLicense */
+    /* Dependency - OssLicense */
     def oss_license_version = "17.0.0"
     ossLicense = "com.google.android.gms:play-services-oss-licenses:$oss_license_version"
 
-    /*Dependency - eventbus*/
+    /* Dependency - Eventbus */
     def event_bus_version = "3.2.0"
     eventBus = "org.greenrobot:eventbus:$event_bus_version"
+
+    /* Dependency - TedImagePicker */
+    def ted_image_picker_version = "1.2.4"
+    tedImagepicker = "io.github.ParkSangGwon:tedimagepicker:$ted_image_picker_version"
 }

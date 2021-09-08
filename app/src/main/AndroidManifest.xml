@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhoPuppy"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.DogImageUploadActivity"></activity>
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.WhoPuppy.FullScreen">

@@ -43,8 +43,6 @@ class AbandonedDogSortDialog : ViewBindingDialogFragment<DialogAbandonedAnimalSo
             Sex.FEMALE -> binding.femaleRadioButton.isChecked = true
             Sex.NEUTRAL -> binding.neutralRadioButton.isChecked = true
         }
-
-
     }
 
     private fun initAreaEditText() {

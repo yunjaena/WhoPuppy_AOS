@@ -125,4 +125,7 @@ dependencies {
 
     /*Dependency - eventbus*/
     implementation project.eventBus
+
+    /* Dependency - TedImagePicker */
+    implementation project.tedImagepicker
 }

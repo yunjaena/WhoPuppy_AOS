@@ -13,6 +13,7 @@ import com.yunjaena.whopuppy.base.fragment.ViewBindingFragment
 import com.yunjaena.whopuppy.databinding.FragmentHomeBinding
 import com.yunjaena.whopuppy.util.LinearLayoutItemDecoration
 import com.yunjaena.whopuppy.util.goToAbandonedAnimalActivity
+import com.yunjaena.whopuppy.util.goToDogImageUploadActivity
 import com.yunjaena.whopuppy.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -34,6 +35,9 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
     private fun initView() {
         binding.showMoreAbandonedAnimalImageView.setOnClickListener {
             requireContext().goToAbandonedAnimalActivity()
+        }
+        binding.findDogBreedButton.setOnClickListener {
+            requireContext().goToDogImageUploadActivity()
         }
         initRecyclerView()
     }
