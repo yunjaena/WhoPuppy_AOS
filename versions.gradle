@@ -107,4 +107,8 @@ ext {
     /* Dependency - TedImagePicker */
     def ted_image_picker_version = "1.2.4"
     tedImagepicker = "io.github.ParkSangGwon:tedimagepicker:$ted_image_picker_version"
+
+    /* Dependency - MPAndroidChart */
+    def mp_char_version = "v3.1.0"
+    mpChart = "com.github.PhilJay:MPAndroidChart:$mp_char_version"
 }

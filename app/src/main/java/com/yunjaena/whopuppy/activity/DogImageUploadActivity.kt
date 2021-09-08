@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.base.activity.ViewBindingActivity
 import com.yunjaena.whopuppy.databinding.ActivityDogImageUploadBinding
+import com.yunjaena.whopuppy.util.goToBreedCheckActivity
 import com.yunjaena.whopuppy.util.setOnSingleClickListener
 import com.yunjaena.whopuppy.util.showToast
 import com.yunjaena.whopuppy.viewmodel.DogImageUploadViewModel
@@ -41,10 +42,6 @@ class DogImageUploadActivity : ViewBindingActivity<ActivityDogImageUploadBinding
     }
 
     private fun setImage(uri: Uri) {
-        Glide.with(this@DogImageUploadActivity)
-            .load(uri)
-            .into(binding.dogImageView)
-
         dogImageUploadViewModel.setImage(uri)
     }
 
@@ -52,7 +49,7 @@ class DogImageUploadActivity : ViewBindingActivity<ActivityDogImageUploadBinding
         with(dogImageUploadViewModel) {
             successImageUploadEvent.observe(this@DogImageUploadActivity) {
                 if (it != null)
-                    showToast(it)
+                    goToBreedCheckActivity(it)
             }
 
             failUploadImageMessageEvent.observe(this@DogImageUploadActivity) {
@@ -60,6 +57,12 @@ class DogImageUploadActivity : ViewBindingActivity<ActivityDogImageUploadBinding
                     it != null -> showToast(it)
                     else -> showToast(getString(R.string.please_upload_image))
                 }
+            }
+
+            imageUri.observe(this@DogImageUploadActivity) {
+                Glide.with(this@DogImageUploadActivity)
+                    .load(it)
+                    .into(binding.dogImageView)
             }
         }
     }

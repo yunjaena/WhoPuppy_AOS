@@ -2,6 +2,7 @@ package com.yunjaena.whopuppy.di
 
 import com.yunjaena.whopuppy.viewmodel.AbandonedDogDetailViewModel
 import com.yunjaena.whopuppy.viewmodel.AbandonedDogSearchViewModel
+import com.yunjaena.whopuppy.viewmodel.BreedCheckViewModel
 import com.yunjaena.whopuppy.viewmodel.DogImageUploadViewModel
 import com.yunjaena.whopuppy.viewmodel.FindPasswordViewModel
 import com.yunjaena.whopuppy.viewmodel.HomeViewModel
@@ -24,4 +25,5 @@ val viewModelModule = module {
     viewModel { MyInfoViewModel(get()) }
     viewModel { MyInfoEditViewModel(get()) }
     viewModel { DogImageUploadViewModel(get()) }
+    viewModel { BreedCheckViewModel(get()) }
 }

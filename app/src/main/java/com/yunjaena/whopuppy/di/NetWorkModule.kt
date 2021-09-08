@@ -7,6 +7,8 @@ import com.yunjaena.whopuppy.api.AuthApi
 import com.yunjaena.whopuppy.api.NoAuthApi
 import com.yunjaena.whopuppy.constant.ACCESS_TOKEN
 import com.yunjaena.whopuppy.constant.AUTH
+import com.yunjaena.whopuppy.constant.AUTH_FLASK_SERVER
+import com.yunjaena.whopuppy.constant.AUTH_FLASK_SERVER_ADDRESS
 import com.yunjaena.whopuppy.constant.NO_AUTH
 import com.yunjaena.whopuppy.constant.PRODUCTION_SERVER_BASE_URL
 import com.yunjaena.whopuppy.constant.REFRESH_AUTH
@@ -97,6 +99,16 @@ val netWorkModule = module {
             .build()
     }
 
+    single(named(AUTH_FLASK_SERVER)) {
+        Retrofit.Builder()
+            .client(get(named(AUTH)))
+            .baseUrl(AUTH_FLASK_SERVER_ADDRESS)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .build()
+    }
+
     single(named(REFRESH_AUTH)) {
         Retrofit.Builder()
             .client(get(named(REFRESH_AUTH)))
@@ -113,6 +125,10 @@ val netWorkModule = module {
 
     single(named(AUTH)) {
         provideAuthApi(get(named(AUTH)))
+    }
+
+    single(named(AUTH_FLASK_SERVER)) {
+        provideAuthApi(get(named(AUTH_FLASK_SERVER)))
     }
 
     single(named(REFRESH_AUTH)) {

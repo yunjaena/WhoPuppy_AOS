@@ -7,8 +7,13 @@ import android.content.DialogInterface
 import android.content.res.Resources.getSystem
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isVisible
 import com.yunjaena.whopuppy.R
 
 fun Context.showProgressDialog(userDim: Boolean = true): AlertDialog {
@@ -68,4 +73,14 @@ fun Activity.hideKeyBoard() {
             InputMethodManager.HIDE_NOT_ALWAYS
         )
     }
+}
+
+fun View.slideVisibility(visibility: Boolean, durationTime: Long = 300) {
+    val transition = Slide(Gravity.BOTTOM)
+    transition.apply {
+        duration = durationTime
+        addTarget(this@slideVisibility)
+    }
+    TransitionManager.beginDelayedTransition(this.parent as ViewGroup, transition)
+    isVisible = visibility
 }

@@ -128,4 +128,8 @@ dependencies {
 
     /* Dependency - TedImagePicker */
     implementation project.tedImagepicker
+
+    /* Dependency - MPAndroidChart */
+    implementation project.mpChart
+
 }

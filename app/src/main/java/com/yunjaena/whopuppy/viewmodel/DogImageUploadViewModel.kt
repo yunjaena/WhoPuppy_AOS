@@ -1,6 +1,8 @@
 package com.yunjaena.whopuppy.viewmodel
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.yunjaena.whopuppy.base.viewmodel.ViewModelBase
 import com.yunjaena.whopuppy.data.CommunityRepository
 import com.yunjaena.whopuppy.data.response.toCommonResponse
@@ -14,20 +16,22 @@ import io.reactivex.rxjava3.kotlin.addTo
 class DogImageUploadViewModel(
     private val communityRepository: CommunityRepository
 ) : ViewModelBase() {
-    private var imageUri: Uri? = null
+    val imageUri: LiveData<Uri?>
+        get() = _imageUri
+    private var _imageUri = MutableLiveData<Uri?>()
     var successImageUploadEvent = SingleLiveEvent<String>()
     var failUploadImageMessageEvent = SingleLiveEvent<String>()
 
     fun setImage(uri: Uri) {
-        imageUri = uri
+        _imageUri.value = uri
     }
 
     fun uploadImage() {
-        if (imageUri == null) {
+        if (imageUri.value == null) {
             failUploadImageMessageEvent.call()
             return
         }
-        val imageFile = imageUri!!.toFile()
+        val imageFile = imageUri.value!!.toFile()
         communityRepository.uploadImage(imageFile)
             .handleProgress(this)
             .handleHttpException()

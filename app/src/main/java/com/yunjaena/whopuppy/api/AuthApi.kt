@@ -5,12 +5,14 @@ import com.yunjaena.whopuppy.data.response.CommonResponse
 import com.yunjaena.whopuppy.data.response.TokenResponse
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 interface AuthApi {
     @POST("/user/refresh")
@@ -25,4 +27,7 @@ interface AuthApi {
     @Multipart
     @POST("/community/article/image")
     fun uploadCommunityImage(@Part multipartFile: MultipartBody.Part): Single<String>
+
+    @GET(".")
+    fun getDogBreedInfo(@Query("url") imageUrl: String): Single<ResponseBody>
 }

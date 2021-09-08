@@ -1,6 +1,7 @@
 package com.yunjaena.whopuppy.di
 
 import com.yunjaena.whopuppy.constant.AUTH
+import com.yunjaena.whopuppy.constant.AUTH_FLASK_SERVER
 import com.yunjaena.whopuppy.constant.NO_AUTH
 import com.yunjaena.whopuppy.constant.REFRESH_AUTH
 import com.yunjaena.whopuppy.data.AnimalRepository
@@ -17,7 +18,7 @@ val repositoryModule = module {
     single { UserLocalDataSource() }
     single { UserRemoteDataSource(get(named(REFRESH_AUTH)), get(named(NO_AUTH)), get(named(AUTH))) }
     single { UserRepository(get<UserLocalDataSource>(), get<UserRemoteDataSource>()) }
-    single { AnimalRemoteDataSource(get(named(NO_AUTH))) }
+    single { AnimalRemoteDataSource(get(named(NO_AUTH)), get(named(AUTH_FLASK_SERVER))) }
     single { AnimalRepository(get<AnimalRemoteDataSource>()) }
     single { CommunityRemoteDataSource(get(named(AUTH))) }
     single { CommunityRepository(get<CommunityRemoteDataSource>()) }
