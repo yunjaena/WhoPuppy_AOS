@@ -7,8 +7,11 @@ import android.content.DialogInterface
 import android.content.res.Resources.getSystem
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.transition.Slide
 import android.transition.TransitionManager
+import android.util.DisplayMetrics
+import android.view.Display
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +65,39 @@ fun Float.dpToPx() = (this * getSystem().displayMetrics.density).toInt()
 fun Int.pxToDp() = this.toFloat().pxToDp()
 
 fun Float.pxToDp() = (this / getSystem().displayMetrics.density).toInt()
+
+fun Activity.getScreenWidth(): Int {
+    var width: Int = 0
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        val displayMetrics = DisplayMetrics()
+        val display: Display? = this.display
+        display!!.getRealMetrics(displayMetrics)
+        return displayMetrics.widthPixels
+    } else {
+        val displayMetrics = DisplayMetrics()
+        this.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        width = displayMetrics.widthPixels
+        return width
+    }
+}
+
+fun Activity.getScreenHeight(): Int {
+    var height: Int = 0
+    return when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
+            val displayMetrics = DisplayMetrics()
+            val display = this.display
+            display!!.getRealMetrics(displayMetrics)
+            displayMetrics.heightPixels
+        }
+        else -> {
+            val displayMetrics = DisplayMetrics()
+            this.windowManager.defaultDisplay.getMetrics(displayMetrics)
+            height = displayMetrics.heightPixels
+            height
+        }
+    }
+}
 
 fun Activity.hideKeyBoard() {
     val inputManager: InputMethodManager =

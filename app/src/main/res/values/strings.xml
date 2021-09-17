@@ -78,4 +78,9 @@
     <string name="ready_to_analysis">분석 시작</string>
     <string name="breed_analysis">품종 분석</string>
     <string name="please_upload_image">강아지 이미지를 눌러서 이미지를 업로드 해주세요~!</string>
+    <string name="input_title">제목을 입력해주세요</string>
+    <string name="select_area">지역을 선택해주세요.</string>
+    <string name="input_content">본문을 입력해주세요</string>
+    <string name="select_specific_area">세부 지역을 선택해주세요.</string>
+    <string name="upload_image">이미지 업로드</string>
 </resources>

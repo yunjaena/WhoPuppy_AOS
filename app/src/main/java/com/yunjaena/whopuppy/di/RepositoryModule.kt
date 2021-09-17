@@ -5,10 +5,12 @@ import com.yunjaena.whopuppy.constant.AUTH_FLASK_SERVER
 import com.yunjaena.whopuppy.constant.NO_AUTH
 import com.yunjaena.whopuppy.constant.REFRESH_AUTH
 import com.yunjaena.whopuppy.data.AnimalRepository
+import com.yunjaena.whopuppy.data.ChatRepository
 import com.yunjaena.whopuppy.data.CommunityRepository
 import com.yunjaena.whopuppy.data.UserRepository
 import com.yunjaena.whopuppy.data.local.UserLocalDataSource
 import com.yunjaena.whopuppy.data.remote.AnimalRemoteDataSource
+import com.yunjaena.whopuppy.data.remote.ChatRemoteDataSource
 import com.yunjaena.whopuppy.data.remote.CommunityRemoteDataSource
 import com.yunjaena.whopuppy.data.remote.UserRemoteDataSource
 import org.koin.core.qualifier.named
@@ -22,4 +24,6 @@ val repositoryModule = module {
     single { AnimalRepository(get<AnimalRemoteDataSource>()) }
     single { CommunityRemoteDataSource(get(named(AUTH))) }
     single { CommunityRepository(get<CommunityRemoteDataSource>()) }
+    single { ChatRemoteDataSource(get()) }
+    single { ChatRepository(get<ChatRemoteDataSource>()) }
 }

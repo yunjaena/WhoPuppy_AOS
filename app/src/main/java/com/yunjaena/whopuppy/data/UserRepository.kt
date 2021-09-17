@@ -60,6 +60,10 @@ class UserRepository(
         return userRemoteDataSource.getUserInfo()
     }
 
+    override suspend fun getUserInfoCoroutine(): User {
+        return userRemoteDataSource.getUserInfoCoroutine()
+    }
+
     override fun logout(): Completable {
         return userLocalDataSource.logout()
     }

@@ -30,6 +30,7 @@ fun Completable.withThread(): Completable {
         .observeOn(AndroidSchedulers.mainThread())
 }
 
+
 fun Completable.handleHttpException(): Completable {
     return doOnError {
         handleHttpException(it)

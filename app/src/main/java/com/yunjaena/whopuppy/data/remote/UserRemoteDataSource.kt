@@ -60,6 +60,10 @@ class UserRemoteDataSource(
         return authApi.getUserInfo()
     }
 
+    override suspend fun getUserInfoCoroutine(): User {
+        return authApi.getUserInfoCoroutine()
+    }
+
     override fun logout(): Completable {
         return Completable.never()
     }

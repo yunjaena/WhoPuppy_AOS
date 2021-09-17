@@ -25,7 +25,7 @@ class TokenAuthenticator(
 ) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         try {
-            if (response.code() != 401) return null
+            if (response.code != 401) return null
 
             val tokenResult = getRefreshedJwtTokenResult()
 
@@ -45,7 +45,6 @@ class TokenAuthenticator(
             goToLoginActivity()
             return null
         }
-
         return null
     }
 
@@ -77,7 +76,7 @@ class TokenAuthenticator(
     }
 
     private fun getRequest(response: Response, token: String): Request {
-        return response.request()
+        return response.request
             .newBuilder()
             .removeHeader("Authorization")
             .addHeader("Authorization", "Bearer $token")
@@ -85,18 +84,18 @@ class TokenAuthenticator(
     }
 
     private fun goToLoginActivity() {
-        showSessionExpiredToastMessage()
-        context.applicationContext.goToLoginActivity()
+        Handler(Looper.getMainLooper()).post {
+            showSessionExpiredToastMessage()
+            context.applicationContext.goToLoginActivity()
+        }
     }
 
     private fun showSessionExpiredToastMessage() {
-        Handler(Looper.getMainLooper()).post {
-            Toast.makeText(
-                context.applicationContext,
-                context.getString(R.string.token_expired),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        Toast.makeText(
+            context.applicationContext,
+            context.getString(R.string.token_expired),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     companion object {

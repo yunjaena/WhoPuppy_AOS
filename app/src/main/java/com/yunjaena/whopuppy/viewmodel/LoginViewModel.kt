@@ -20,7 +20,6 @@ class LoginViewModel(
     fun login(id: String, password: String) {
         val user = User(account = id, password = password.toSha256())
         userRepository.login(user)
-            .handleHttpException()
             .handleProgress(this)
             .withThread()
             .subscribe({

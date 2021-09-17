@@ -74,6 +74,10 @@ class UserLocalDataSource : UserDataSource {
         return Single.never()
     }
 
+    override suspend fun getUserInfoCoroutine(): User {
+        throw UnsupportedOperationException("getUserInfoCoroutine not supported")
+    }
+
     override fun logout(): Completable {
         return Completable.create {
             if (it.isDisposed) return@create

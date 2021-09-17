@@ -7,6 +7,7 @@ import com.yunjaena.whopuppy.api.AuthApi
 import com.yunjaena.whopuppy.api.NoAuthApi
 import com.yunjaena.whopuppy.constant.ACCESS_TOKEN
 import com.yunjaena.whopuppy.constant.AUTH
+import com.yunjaena.whopuppy.constant.AUTH_CHAT
 import com.yunjaena.whopuppy.constant.AUTH_FLASK_SERVER
 import com.yunjaena.whopuppy.constant.AUTH_FLASK_SERVER_ADDRESS
 import com.yunjaena.whopuppy.constant.NO_AUTH
@@ -16,9 +17,12 @@ import com.yunjaena.whopuppy.constant.REFRESH_TOKEN
 import com.yunjaena.whopuppy.constant.STAGE_SERVER_BASE_URL
 import com.yunjaena.whopuppy.constant.URL
 import com.yunjaena.whopuppy.util.TokenAuthenticator
+import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import org.hildan.krossbow.stomp.StompClient
+import org.hildan.krossbow.websocket.okhttp.OkHttpWebSocketClient
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -35,21 +39,28 @@ val netWorkModule = module {
             PRODUCTION_SERVER_BASE_URL
     }
 
-    factory(named(NO_AUTH)) {
+    factory {
+        StompClient(OkHttpWebSocketClient(get(named(AUTH_CHAT))))
+    }
+
+    factory {
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
             readTimeout(30, TimeUnit.SECONDS)
             writeTimeout(15, TimeUnit.SECONDS)
             addInterceptor(getHttpLoggingInterceptor())
+            authenticator(TokenAuthenticator(get()))
+        }
+    }
+
+    factory(named(NO_AUTH)) {
+        get<OkHttpClient.Builder>().apply {
+            authenticator(Authenticator.NONE)
         }.build()
     }
 
     factory(named(AUTH)) {
-        OkHttpClient.Builder().apply {
-            connectTimeout(10, TimeUnit.SECONDS)
-            readTimeout(30, TimeUnit.SECONDS)
-            writeTimeout(15, TimeUnit.SECONDS)
-            addInterceptor(getHttpLoggingInterceptor())
+        get<OkHttpClient.Builder>().apply {
             addInterceptor { chain ->
                 val accessToken = Hawk.get(ACCESS_TOKEN, "")
                 Logger.d("access token : $accessToken")
@@ -58,21 +69,30 @@ val netWorkModule = module {
                     .build()
                 chain.proceed(newRequest)
             }
-            authenticator(TokenAuthenticator(get()))
         }.build()
     }
 
     factory(named(REFRESH_AUTH)) {
-        OkHttpClient.Builder().apply {
-            connectTimeout(10, TimeUnit.SECONDS)
-            readTimeout(30, TimeUnit.SECONDS)
-            writeTimeout(15, TimeUnit.SECONDS)
-            addInterceptor(getHttpLoggingInterceptor())
+        get<OkHttpClient.Builder>().apply {
             addInterceptor { chain ->
                 val refreshToken = Hawk.get(REFRESH_TOKEN, "")
                 Logger.d("refresh token : $refreshToken")
                 val newRequest: Request = chain.request().newBuilder()
                     .addHeader("RefreshToken", "Bearer $refreshToken")
+                    .build()
+                chain.proceed(newRequest)
+            }
+        }.build()
+    }
+
+    factory(named(AUTH_CHAT)) {
+        get<OkHttpClient.Builder>().apply {
+            pingInterval(10, TimeUnit.SECONDS)
+            addInterceptor { chain ->
+                val accessToken = Hawk.get(ACCESS_TOKEN, "")
+                Logger.d("access token : $accessToken")
+                val newRequest: Request = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer $accessToken")
                     .build()
                 chain.proceed(newRequest)
             }

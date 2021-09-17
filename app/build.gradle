@@ -132,4 +132,7 @@ dependencies {
     /* Dependency - MPAndroidChart */
     implementation project.mpChart
 
+    /* Dependency - STOMP */
+    implementation project.stomp
+    implementation project.stompOkhttp
 }

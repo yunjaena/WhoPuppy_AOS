@@ -7,14 +7,17 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.yunjaena.whopuppy.R
+import com.yunjaena.whopuppy.activity.MainActivity
 import com.yunjaena.whopuppy.adapter.AbandonAnimalAdapter
 import com.yunjaena.whopuppy.base.dpToPx
 import com.yunjaena.whopuppy.base.fragment.ViewBindingFragment
 import com.yunjaena.whopuppy.databinding.FragmentHomeBinding
 import com.yunjaena.whopuppy.util.LinearLayoutItemDecoration
+import com.yunjaena.whopuppy.util.SelectTabEvent
 import com.yunjaena.whopuppy.util.goToAbandonedAnimalActivity
 import com.yunjaena.whopuppy.util.goToDogImageUploadActivity
 import com.yunjaena.whopuppy.viewmodel.HomeViewModel
+import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
@@ -33,6 +36,20 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
     }
 
     private fun initView() {
+        binding.rehomeDogSearchImageView.setOnClickListener {
+            goToBardFragment()
+            EventBus.getDefault().post(SelectTabEvent(0))
+        }
+
+        binding.adoptDogSearchImageView.setOnClickListener {
+            goToBardFragment()
+            EventBus.getDefault().post(SelectTabEvent(1))
+        }
+        binding.adoptDogReviewSearchImageView.setOnClickListener {
+            goToBardFragment()
+            EventBus.getDefault().post(SelectTabEvent(2))
+        }
+
         binding.showMoreAbandonedAnimalImageView.setOnClickListener {
             requireContext().goToAbandonedAnimalActivity()
         }
@@ -40,6 +57,11 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
             requireContext().goToDogImageUploadActivity()
         }
         initRecyclerView()
+    }
+
+    private fun goToBardFragment() {
+        (requireActivity() as? MainActivity)?.binding?.bottomNavigation?.selectedItemId =
+            R.id.action_board
     }
 
     private fun initRecyclerView() {

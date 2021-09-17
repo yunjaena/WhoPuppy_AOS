@@ -10,6 +10,9 @@ import com.orhanobut.logger.Logger
 import com.yunjaena.whopuppy.activity.AbandonedAnimalDetailActivity
 import com.yunjaena.whopuppy.activity.AbandonedAnimalDetailActivity.Companion.EXTRA_ABANDONED_ITEM_INDEX
 import com.yunjaena.whopuppy.activity.AbandonedAnimalSearchActivity
+import com.yunjaena.whopuppy.activity.ArticleWriteActivity
+import com.yunjaena.whopuppy.activity.ArticleWriteActivity.Companion.EXTRA_BOARD_ID
+import com.yunjaena.whopuppy.activity.ArticleWriteActivity.Companion.EXTRA_BOARD_TITLE
 import com.yunjaena.whopuppy.activity.BreedCheckActivity
 import com.yunjaena.whopuppy.activity.BreedCheckActivity.Companion.EXTRA_IMAGE_URL
 import com.yunjaena.whopuppy.activity.DogImageUploadActivity
@@ -96,6 +99,21 @@ fun Context.goToBreedCheckActivity(imageUrl: String) {
     Intent(this, BreedCheckActivity::class.java).apply {
         addFlags(FLAG_ACTIVITY_SINGLE_TOP or FLAG_ACTIVITY_CLEAR_TOP)
         putExtra(EXTRA_IMAGE_URL, imageUrl)
+    }.run {
+        startActivity(this)
+    }
+}
+
+
+fun Context.goToArticleWriteActivity(boarId: Long, boardTitle: String) {
+    if (this is Activity && isFinishing) {
+        Logger.e("ActivityChanger activity is finished.")
+        return
+    }
+    Intent(this, ArticleWriteActivity::class.java).apply {
+        addFlags(FLAG_ACTIVITY_SINGLE_TOP or FLAG_ACTIVITY_CLEAR_TOP)
+        putExtra(EXTRA_BOARD_ID, boarId)
+        putExtra(EXTRA_BOARD_TITLE, boardTitle)
     }.run {
         startActivity(this)
     }
