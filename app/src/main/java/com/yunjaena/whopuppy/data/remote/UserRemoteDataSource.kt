@@ -7,8 +7,10 @@ import com.yunjaena.whopuppy.data.entity.AuthNumber
 import com.yunjaena.whopuppy.data.entity.User
 import com.yunjaena.whopuppy.data.response.CommonResponse
 import com.yunjaena.whopuppy.data.response.TokenResponse
+import com.yunjaena.whopuppy.util.FormDataUtil
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import java.io.File
 
 class UserRemoteDataSource(
     private val refreshTokenApi: AuthApi,
@@ -70,5 +72,9 @@ class UserRemoteDataSource(
 
     override fun updateNickName(user: User): Single<CommonResponse> {
         return authApi.updateNickName(user)
+    }
+
+    override fun updateProfileImage(file: File): Completable {
+        return authApi.updateProfile(FormDataUtil.getImageBody("multipartFile", file))
     }
 }

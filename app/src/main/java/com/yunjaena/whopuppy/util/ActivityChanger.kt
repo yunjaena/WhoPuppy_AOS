@@ -10,6 +10,9 @@ import com.orhanobut.logger.Logger
 import com.yunjaena.whopuppy.activity.AbandonedAnimalDetailActivity
 import com.yunjaena.whopuppy.activity.AbandonedAnimalDetailActivity.Companion.EXTRA_ABANDONED_ITEM_INDEX
 import com.yunjaena.whopuppy.activity.AbandonedAnimalSearchActivity
+import com.yunjaena.whopuppy.activity.ArticleDetailActivity
+import com.yunjaena.whopuppy.activity.ArticleDetailActivity.Companion.EXTRA_ARTICLE_ID
+import com.yunjaena.whopuppy.activity.ArticleEditActivity
 import com.yunjaena.whopuppy.activity.ArticleWriteActivity
 import com.yunjaena.whopuppy.activity.ArticleWriteActivity.Companion.EXTRA_BOARD_ID
 import com.yunjaena.whopuppy.activity.ArticleWriteActivity.Companion.EXTRA_BOARD_TITLE
@@ -114,6 +117,32 @@ fun Context.goToArticleWriteActivity(boarId: Long, boardTitle: String) {
         addFlags(FLAG_ACTIVITY_SINGLE_TOP or FLAG_ACTIVITY_CLEAR_TOP)
         putExtra(EXTRA_BOARD_ID, boarId)
         putExtra(EXTRA_BOARD_TITLE, boardTitle)
+    }.run {
+        startActivity(this)
+    }
+}
+
+fun Context.goToArticleEditActivity(articleId: Long) {
+    if (this is Activity && isFinishing) {
+        Logger.e("ActivityChanger activity is finished.")
+        return
+    }
+    Intent(this, ArticleEditActivity::class.java).apply {
+        addFlags(FLAG_ACTIVITY_SINGLE_TOP or FLAG_ACTIVITY_CLEAR_TOP)
+        putExtra(ArticleEditActivity.EXTRA_ARTICLE_ID, articleId)
+    }.run {
+        startActivity(this)
+    }
+}
+
+fun Context.goToArticleDetailActivity(articleId: Long) {
+    if (this is Activity && isFinishing) {
+        Logger.e("ActivityChanger activity is finished.")
+        return
+    }
+    Intent(this, ArticleDetailActivity::class.java).apply {
+        addFlags(FLAG_ACTIVITY_SINGLE_TOP or FLAG_ACTIVITY_CLEAR_TOP)
+        putExtra(EXTRA_ARTICLE_ID, articleId)
     }.run {
         startActivity(this)
     }

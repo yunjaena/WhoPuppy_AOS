@@ -30,6 +30,6 @@ val viewModelModule = module {
     viewModel { DogImageUploadViewModel(get()) }
     viewModel { BreedCheckViewModel(get()) }
     viewModel { BoardListViewModel(get()) }
-    viewModel { ArticleViewModel(get()) }
+    viewModel { ArticleViewModel(get(), get()) }
     viewModel { ChatListViewModel(get(), get()) }
 }

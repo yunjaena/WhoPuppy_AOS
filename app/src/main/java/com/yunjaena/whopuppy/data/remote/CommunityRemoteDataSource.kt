@@ -33,14 +33,14 @@ class CommunityRemoteDataSource(
         return api.getArticle(articleId)
     }
 
-    override fun writeArticle(articleItem: ArticleItem): Single<Int> {
+    override fun writeArticle(articleItem: ArticleItem): Single<Long> {
         return api.postArticle(articleItem)
     }
 
     override fun updateArticle(articleItem: ArticleItem): Completable {
         if (articleItem.id == null)
             return Completable.error(IllegalArgumentException("article id is null"))
-        return api.putArticle(articleItem.id, articleItem)
+        return api.putArticle(articleItem.id, articleItem.copy(id = null))
     }
 
     override fun deleteArticle(id: Long): Completable {

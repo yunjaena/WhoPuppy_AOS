@@ -1,12 +1,13 @@
 package com.yunjaena.whopuppy.activity
 
 import android.os.Bundle
+import androidx.core.net.toUri
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.adapter.ImageUploadAdapter
 import com.yunjaena.whopuppy.base.activity.ViewBindingActivity
 import com.yunjaena.whopuppy.data.Area
 import com.yunjaena.whopuppy.data.entity.ArticleItem
-import com.yunjaena.whopuppy.databinding.ActivityArticleWriteBinding
+import com.yunjaena.whopuppy.databinding.ActivityArticleEditBinding
 import com.yunjaena.whopuppy.dialog.AreaSelectorDialog
 import com.yunjaena.whopuppy.fragment.ArticleFragment
 import com.yunjaena.whopuppy.util.UpdateEvent
@@ -23,12 +24,12 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ArticleWriteActivity : ViewBindingActivity<ActivityArticleWriteBinding>() {
-    override val layoutId: Int = R.layout.activity_article_write
+class ArticleEditActivity : ViewBindingActivity<ActivityArticleEditBinding>() {
+    override val layoutId: Int = R.layout.activity_article_edit
     private val articleViewModel: ArticleViewModel by viewModel()
     private lateinit var imageUploadAdapter: ImageUploadAdapter
     private var boardId: Long = 0
-    private var boardTitle = ""
+    private var articleId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +37,12 @@ class ArticleWriteActivity : ViewBindingActivity<ActivityArticleWriteBinding>() 
     }
 
     private fun init() {
-        boardId = intent.getLongExtra(EXTRA_BOARD_ID, 0)
-        boardTitle = intent.getStringExtra(EXTRA_BOARD_TITLE) ?: ""
+        articleId = intent.getLongExtra(EXTRA_ARTICLE_ID, 0)
         useDefaultLoading(articleViewModel)
         initAreaSelectFragmentResultListener()
         initView()
         initObserver()
+        articleViewModel.getArticle(articleId)
     }
 
     private fun initView() {
@@ -53,12 +54,14 @@ class ArticleWriteActivity : ViewBindingActivity<ActivityArticleWriteBinding>() 
     }
 
     private fun initUploadButton() {
-        setBaseAppBar(boardTitle)
+        val boardName = articleViewModel.articleFetchEvent.value?.board
+        setBaseAppBar(boardName ?: getString(R.string.edit))
         setBackKey()
         setCheckButton {
             val title = binding.titleEditText.text.toString().trim()
             val content = binding.contentEditText.text.toString().trim()
-            articleViewModel.writeArticle(
+            articleViewModel.editArticle(
+                articleId,
                 ArticleItem(
                     boardId = boardId,
                     title = title,
@@ -107,16 +110,28 @@ class ArticleWriteActivity : ViewBindingActivity<ActivityArticleWriteBinding>() 
 
     private fun initObserver() {
         with(articleViewModel) {
-            imageUris.observe(this@ArticleWriteActivity) {
+            articleFetchEvent.observe(this@ArticleEditActivity) { articleItem ->
+                if (articleItem == null) return@observe
+                val area = Area.values().find { it.areaName == articleItem.region } ?: Area.ALL
+                updateSelectArea(area)
+                setAppBarTitle(articleItem.board ?: "")
+                binding.titleEditText.setText(articleItem.title ?: "")
+                binding.contentEditText.setText(articleItem.content ?: "")
+                articleItem.images?.map { it -> it.toUri() }?.let {
+                    addImageUri(it)
+                }
+            }
+
+            imageUris.observe(this@ArticleEditActivity) {
                 imageUploadAdapter.updateItem(it)
             }
 
-            selectArea.observe(this@ArticleWriteActivity) {
+            selectArea.observe(this@ArticleEditActivity) {
                 if (it != null)
                     binding.areaTextView.text = it.areaName
             }
 
-            articleEmptyCheck.observe(this@ArticleWriteActivity) { it ->
+            articleEmptyCheck.observe(this@ArticleEditActivity) { it ->
                 if (it == null) return@observe
                 when (it) {
                     Region -> showToast(getString(R.string.select_area))
@@ -126,14 +141,13 @@ class ArticleWriteActivity : ViewBindingActivity<ActivityArticleWriteBinding>() 
                 }
             }
 
-            uploadArticleSuccessEvent.observe(this@ArticleWriteActivity) {
-                if (it == null) return@observe
+            updateArticleSuccessEvent.observe(this@ArticleEditActivity) {
                 EventBus.getDefault().post(UpdateEvent(ArticleFragment.TAG))
-                goToArticleDetailActivity(it)
+                EventBus.getDefault().post(UpdateEvent(ArticleDetailActivity.TAG))
                 finish()
             }
 
-            showErrorMessage.observe(this@ArticleWriteActivity) {
+            showErrorMessage.observe(this@ArticleEditActivity) {
                 if (it != null)
                     showToast(it)
             }
@@ -141,7 +155,7 @@ class ArticleWriteActivity : ViewBindingActivity<ActivityArticleWriteBinding>() 
     }
 
     companion object {
+        const val EXTRA_ARTICLE_ID = "ARTICLE_ID"
         const val EXTRA_BOARD_ID = "BOARD_ID"
-        const val EXTRA_BOARD_TITLE = "EXTRA_BOARD_TITLE"
     }
 }

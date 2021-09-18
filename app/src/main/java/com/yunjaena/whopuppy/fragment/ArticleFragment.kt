@@ -9,9 +9,13 @@ import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.adapter.ArticleListAdapter
 import com.yunjaena.whopuppy.base.fragment.ViewBindingFragment
 import com.yunjaena.whopuppy.databinding.FragmentArticleBinding
+import com.yunjaena.whopuppy.util.UpdateEvent
 import com.yunjaena.whopuppy.util.goToArticleWriteActivity
 import com.yunjaena.whopuppy.viewmodel.ArticleSearchQuery
 import com.yunjaena.whopuppy.viewmodel.ArticleViewModel
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArticleFragment : ViewBindingFragment<FragmentArticleBinding>(), RefreshFragment {
@@ -23,8 +27,15 @@ class ArticleFragment : ViewBindingFragment<FragmentArticleBinding>(), RefreshFr
     var title: String? = null
     var area: String? = null
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun refreshEvent(updateEvent: UpdateEvent) {
+        if (updateEvent.tag != TAG) return
+        articleViewModel.refreshArticleList()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        EventBus.getDefault().register(this)
         boardId = arguments?.getLong(BOARD_ID, 0) ?: 0
         boardTitle = arguments?.getString(BOARD_TITLE) ?: ""
         title = arguments?.getString(TITLE)
@@ -54,7 +65,7 @@ class ArticleFragment : ViewBindingFragment<FragmentArticleBinding>(), RefreshFr
 
     private fun initSwipeLayout() {
         binding.swipeLayout.setOnRefreshListener {
-            articleViewModel.refresh()
+            articleViewModel.refreshArticleList()
         }
     }
 
@@ -95,6 +106,11 @@ class ArticleFragment : ViewBindingFragment<FragmentArticleBinding>(), RefreshFr
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        EventBus.getDefault().unregister(this)
+    }
+
     override fun refresh(bundle: Bundle?) {
         if (bundle == null) return
         title = bundle.getString(TITLE)
@@ -107,6 +123,7 @@ class ArticleFragment : ViewBindingFragment<FragmentArticleBinding>(), RefreshFr
     }
 
     companion object {
+        const val TAG = "ArticleFragment"
         const val BOARD_ID = "BOARD_ID"
         const val BOARD_TITLE = "BOARD_TITLE"
         const val AREA = "AREA"

@@ -7,6 +7,7 @@ import com.orhanobut.logger.Logger
 import com.yunjaena.whopuppy.base.viewmodel.ViewModelBase
 import com.yunjaena.whopuppy.data.Area
 import com.yunjaena.whopuppy.data.CommunityRepository
+import com.yunjaena.whopuppy.data.UserRepository
 import com.yunjaena.whopuppy.data.entity.ArticleItem
 import com.yunjaena.whopuppy.data.response.toCommonResponse
 import com.yunjaena.whopuppy.util.SingleLiveEvent
@@ -18,7 +19,8 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.kotlin.addTo
 
 class ArticleViewModel(
-    private val communityRepository: CommunityRepository
+    private val communityRepository: CommunityRepository,
+    private val userRepository: UserRepository,
 ) : ViewModelBase() {
     private var articleQuery: ArticleSearchQuery? = null
     var isEndOfPage: Boolean = false
@@ -28,8 +30,7 @@ class ArticleViewModel(
         get() = _articleList
     private val _articleList = MutableLiveData<ArrayList<ArticleItem>>()
 
-    val uploadArticleSuccessEvent = SingleLiveEvent<Int>()
-    val uploadArticleFailEvent = SingleLiveEvent<String>()
+    val uploadArticleSuccessEvent = SingleLiveEvent<Long>()
     val imageUris: LiveData<ArrayList<Uri>>
         get() = _imageUris
     private val _imageUris = MutableLiveData<ArrayList<Uri>>(arrayListOf())
@@ -39,6 +40,16 @@ class ArticleViewModel(
     private val _selectArea = MutableLiveData<Area>()
 
     val articleEmptyCheck = SingleLiveEvent<Article>()
+
+    val articleDetailItem: LiveData<ArticleItem>
+        get() = _articleDetailItem
+    private val _articleDetailItem = MutableLiveData<ArticleItem>()
+    val articleFetchEvent = SingleLiveEvent<ArticleItem>()
+    val showErrorMessage = SingleLiveEvent<String>()
+    val deleteArticleSuccessEvent = SingleLiveEvent<Boolean>()
+    val updateArticleSuccessEvent = SingleLiveEvent<Boolean>()
+    var isArticleOwner = false
+
 
     fun getArticles(articleQuery: ArticleSearchQuery) {
         if (articleQuery.isSameQuery(this.articleQuery)) return
@@ -52,7 +63,7 @@ class ArticleViewModel(
         getArticleList()
     }
 
-    fun refresh() {
+    fun refreshArticleList() {
         articleQuery?.initPage()
         article.clear()
         getArticleList()
@@ -78,7 +89,31 @@ class ArticleViewModel(
                 _articleList.value = article
             }) {
                 it.toCommonResponse()?.also { response ->
+                    showErrorMessage.value = response.errorMessage
+                }
+            }.addTo(compositeDisposable)
+    }
 
+    fun getArticle(articleId: Long) {
+        if (articleDetailItem.value != null) return
+        getArticleFromServer(articleId)
+    }
+
+    fun refreshArticle(articleId: Long) {
+        getArticleFromServer(articleId)
+    }
+
+    private fun getArticleFromServer(articleId: Long) {
+        communityRepository.getArticle(articleId)
+            .handleHttpException()
+            .handleProgress(this)
+            .withThread()
+            .subscribe({
+                _articleDetailItem.value = it
+                articleFetchEvent.value = it
+            }) {
+                it.toCommonResponse()?.also { response ->
+                    showErrorMessage.value = response.errorMessage
                 }
             }.addTo(compositeDisposable)
     }
@@ -97,6 +132,12 @@ class ArticleViewModel(
         if (!checkArticleValid(articleItem))
             return
         writeArticleToServer(articleItem)
+    }
+
+    fun editArticle(articleId: Long, articleItem: ArticleItem) {
+        if (!checkArticleValid(articleItem))
+            return
+        updateArticleToServer(articleId, articleItem)
     }
 
     private fun checkArticleValid(articleItem: ArticleItem): Boolean {
@@ -122,6 +163,33 @@ class ArticleViewModel(
             return false
         }
         return true
+    }
+
+    fun checkUserWriteArticle(articleItem: ArticleItem) {
+        userRepository.getUserInfo()
+            .handleHttpException()
+            .handleProgress(this)
+            .withThread()
+            .subscribe({
+                isArticleOwner = (articleItem.userId == it.id)
+            }) {
+
+            }.addTo(compositeDisposable)
+
+    }
+
+    fun deleteArticle(articleId: Long) {
+        communityRepository.deleteArticle(articleId)
+            .handleHttpException()
+            .handleProgress(this)
+            .withThread()
+            .subscribe({
+                deleteArticleSuccessEvent.call()
+            }) {
+                it.toCommonResponse()?.also { response ->
+                    showErrorMessage.value = response.errorMessage
+                }
+            }.addTo(compositeDisposable)
     }
 
     private fun writeArticleToServer(articleItem: ArticleItem) {
@@ -150,7 +218,39 @@ class ArticleViewModel(
                 uploadArticleSuccessEvent.value = it
             }) {
                 it.toCommonResponse()?.also { response ->
-                    uploadArticleFailEvent.value = response.errorMessage
+                    showErrorMessage.value = response.errorMessage
+                }
+            }.addTo(compositeDisposable)
+    }
+
+    private fun updateArticleToServer(articleId: Long, articleItem: ArticleItem) {
+        val imageUriList = _imageUris.value!!
+
+        val imageUploadRequest = imageUriList.map {
+            when (it.toString().contains("http")) {
+                true -> Single.just(it.toString())
+                else -> communityRepository.uploadImage(it.toFile())
+            }
+        }
+
+        Single.zip(imageUploadRequest) {
+            it.map { url -> url as String }.toList()
+        }.flatMapCompletable { imageUrls ->
+            communityRepository.updateArticle(
+                articleItem.copy(
+                    id = articleId,
+                    images = imageUrls,
+                    region = selectArea.value!!.areaName
+                )
+            )
+        }.handleHttpException()
+            .handleProgress(this)
+            .withThread()
+            .subscribe({
+                updateArticleSuccessEvent.call()
+            }) {
+                it.toCommonResponse()?.also { response ->
+                    showErrorMessage.value = response.errorMessage
                 }
             }.addTo(compositeDisposable)
     }

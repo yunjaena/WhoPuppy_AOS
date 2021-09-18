@@ -6,6 +6,7 @@ import com.yunjaena.whopuppy.data.response.CommonResponse
 import com.yunjaena.whopuppy.data.response.TokenResponse
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import java.io.File
 
 interface UserDataSource {
     fun getToken(user: User): Single<TokenResponse>
@@ -35,4 +36,6 @@ interface UserDataSource {
     fun logout(): Completable
 
     fun updateNickName(user: User): Single<CommonResponse>
+
+    fun updateProfileImage(file: File): Completable
 }

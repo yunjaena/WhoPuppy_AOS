@@ -40,6 +40,10 @@ class BoardListViewModel(
             }.addTo(compositeDisposable)
     }
 
+    fun refresh() {
+        articleSearchEvent.value = articleSearch
+    }
+
     fun updateSearchTitle(title: String?) {
         articleSearch.setArticleTitle(title)
         articleSearchEvent.value = articleSearch

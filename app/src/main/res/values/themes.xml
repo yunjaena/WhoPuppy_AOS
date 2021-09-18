@@ -33,4 +33,10 @@
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:statusBarColor">@color/primaryDarkColor</item>
     </style>
+
+    <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:colorAccent">@color/primaryTextColor</item>
+    </style>
 </resources>

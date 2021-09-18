@@ -9,6 +9,7 @@ import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.base.recyclerview.BindingViewHolder
 import com.yunjaena.whopuppy.data.entity.ArticleItem
 import com.yunjaena.whopuppy.databinding.ItemArticleBinding
+import com.yunjaena.whopuppy.util.goToArticleDetailActivity
 
 class ArticleListAdapter :
     RecyclerView.Adapter<BindingViewHolder<ItemArticleBinding>>() {
@@ -44,7 +45,7 @@ class ArticleListAdapter :
             articleContent.text = currentItem.content ?: ""
         }
         holder.itemView.setOnClickListener {
-
+            holder.itemView.context.goToArticleDetailActivity(currentItem.id ?: 0)
         }
     }
 

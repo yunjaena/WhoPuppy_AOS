@@ -22,7 +22,7 @@ interface CommunityDataSource {
 
     fun getArticle(articleId: Long): Single<ArticleItem>
 
-    fun writeArticle(articleItem: ArticleItem): Single<Int>
+    fun writeArticle(articleItem: ArticleItem): Single<Long>
 
     fun updateArticle(articleItem: ArticleItem): Completable
 

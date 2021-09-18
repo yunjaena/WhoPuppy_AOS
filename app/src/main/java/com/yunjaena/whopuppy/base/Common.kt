@@ -1,5 +1,7 @@
 package com.yunjaena.whopuppy.base
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -18,6 +20,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import com.yunjaena.whopuppy.R
+
 
 fun Context.showProgressDialog(userDim: Boolean = true): AlertDialog {
     val builder: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -47,6 +50,33 @@ fun Context.showAlertDialog(
         setCancelable(false)
         setPositiveButton(positiveButtonText) { dialog, _ ->
             positiveCallback.invoke(dialog)
+        }
+    }
+    val dialog = alertDialog.create()
+    dialog.setOnShowListener {
+        dialog.window?.setBackgroundDrawableResource(
+            R.drawable.bg_alert_dialog
+        )
+    }
+    dialog.show()
+}
+
+fun Context.showAlertDialog(
+    title: String,
+    message: String,
+    positiveButtonText: String,
+    cancelButtonText: String,
+    positiveCallback: ((DialogInterface) -> Unit)? = null,
+    cancelCallback: ((DialogInterface) -> Unit)? = null,
+) {
+    val alertDialog = AlertDialog.Builder(this, R.style.AlertDialog).apply {
+        setTitle(title)
+        setMessage(message)
+        setPositiveButton(positiveButtonText) { dialog, _ ->
+            positiveCallback?.invoke(dialog) ?: dialog.dismiss()
+        }
+        setNegativeButton(cancelButtonText) { dialog, _ ->
+            cancelCallback?.invoke(dialog) ?: dialog.dismiss()
         }
     }
     val dialog = alertDialog.create()
@@ -119,4 +149,22 @@ fun View.slideVisibility(visibility: Boolean, durationTime: Long = 300) {
     }
     TransitionManager.beginDelayedTransition(this.parent as ViewGroup, transition)
     isVisible = visibility
+}
+
+fun View.fadeInAnimation(durationTime: Long = 300) {
+    visibility = View.VISIBLE
+    animate()
+        .alpha(1f)
+        .setDuration(durationTime)
+        .setListener(null)
+}
+
+fun View.fadeOutAnimation(durationTime: Long = 300) {
+    animate().alpha(0f)
+        .setDuration(durationTime)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                visibility = View.GONE
+            }
+        })
 }

@@ -52,7 +52,7 @@ interface AuthApi {
     ): Single<Articles>
 
     @POST("/community/article")
-    fun postArticle(@Body articleItem: ArticleItem): Single<Int>
+    fun postArticle(@Body articleItem: ArticleItem): Single<Long>
 
     @GET("/community/article/{articleId}")
     fun getArticle(@Path("articleId") articleId: Long): Single<ArticleItem>
@@ -80,4 +80,8 @@ interface AuthApi {
 
     @GET("/community/board/{id}")
     fun getBoard(@Path("id") id: Long): Single<Boards>
+
+    @Multipart
+    @POST("/user/profile")
+    fun updateProfile(@Part multipartFile: MultipartBody.Part): Completable
 }

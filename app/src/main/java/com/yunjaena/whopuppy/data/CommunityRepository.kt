@@ -30,7 +30,7 @@ class CommunityRepository(
         return communityRemoteDataSource.getArticle(articleId)
     }
 
-    override fun writeArticle(articleItem: ArticleItem): Single<Int> {
+    override fun writeArticle(articleItem: ArticleItem): Single<Long> {
         return communityRemoteDataSource.writeArticle(articleItem)
     }
 

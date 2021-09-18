@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentManager
 import com.yunjaena.whopuppy.data.Area
 import com.yunjaena.whopuppy.dialog.AbandonedDogSortDialog
 import com.yunjaena.whopuppy.dialog.AreaSelectorDialog
+import com.yunjaena.whopuppy.fragment.ArticleCommentBottomSheetFragment
 
 fun FragmentManager.showAbandonedDogSortDialog() {
     val tag = AbandonedDogSortDialog.TAG
@@ -18,6 +19,17 @@ fun FragmentManager.showAreaSelectorDialog(
 ) {
     val tag = AreaSelectorDialog.TAG
     val dialog = AreaSelectorDialog.newInstance(selectArea, isAllAreaSelectPossible)
+    if (findFragmentByTag(tag) != null || isDestroyed) return
+    dialog.showNow(this, tag)
+}
+
+
+fun FragmentManager.showArticleCommentBottomSheetDialog(
+    height: Int,
+    articleId: Long
+) {
+    val tag = ArticleCommentBottomSheetFragment.TAG
+    val dialog = ArticleCommentBottomSheetFragment.newInstance(articleId, height)
     if (findFragmentByTag(tag) != null || isDestroyed) return
     dialog.showNow(this, tag)
 }
