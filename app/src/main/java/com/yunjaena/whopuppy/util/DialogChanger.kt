@@ -5,6 +5,7 @@ import com.yunjaena.whopuppy.data.Area
 import com.yunjaena.whopuppy.dialog.AbandonedDogSortDialog
 import com.yunjaena.whopuppy.dialog.AreaSelectorDialog
 import com.yunjaena.whopuppy.fragment.ArticleCommentBottomSheetFragment
+import com.yunjaena.whopuppy.fragment.ArticleCommentWriteBottomSheetFragment
 
 fun FragmentManager.showAbandonedDogSortDialog() {
     val tag = AbandonedDogSortDialog.TAG
@@ -30,6 +31,16 @@ fun FragmentManager.showArticleCommentBottomSheetDialog(
 ) {
     val tag = ArticleCommentBottomSheetFragment.TAG
     val dialog = ArticleCommentBottomSheetFragment.newInstance(articleId, height)
+    if (findFragmentByTag(tag) != null || isDestroyed) return
+    dialog.showNow(this, tag)
+}
+
+fun FragmentManager.showArticleCommentWriteBottomSheetDialog(
+    articleId: Long,
+    profileUrl: String?
+) {
+    val tag = ArticleCommentWriteBottomSheetFragment.TAG
+    val dialog = ArticleCommentWriteBottomSheetFragment.newInstance(articleId, profileUrl)
     if (findFragmentByTag(tag) != null || isDestroyed) return
     dialog.showNow(this, tag)
 }

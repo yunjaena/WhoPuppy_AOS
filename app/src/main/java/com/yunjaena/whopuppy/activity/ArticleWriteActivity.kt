@@ -1,5 +1,6 @@
 package com.yunjaena.whopuppy.activity
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.adapter.ImageUploadAdapter
@@ -75,8 +76,12 @@ class ArticleWriteActivity : ViewBindingActivity<ActivityArticleWriteBinding>() 
 
     private fun initImageAddImageView() {
         binding.imageAddImageView.setOnClickListener {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             TedImagePicker.with(this)
-                .startMultiImage { uriList -> articleViewModel.addImageUri(uriList) }
+                .startMultiImage { uriList ->
+                    articleViewModel.addImageUri(uriList)
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+                }
         }
     }
 

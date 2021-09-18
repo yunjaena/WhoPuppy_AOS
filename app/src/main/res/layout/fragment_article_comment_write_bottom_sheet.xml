@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/thumbnail_image_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="75dp"
+            app:layout_constraintBottom_toBottomOf="@+id/add_comment_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/add_comment_edit_text"
+            app:layout_constraintVertical_bias="0">
+
+            <ImageView
+                android:id="@+id/profile_image_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_brown_dog" />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/add_comment_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:gravity="start|center"
+            android:hint="@string/add_comment"
+            android:maxHeight="150dp"
+            android:minHeight="30dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_comment_button"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_image_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="" />
+
+        <ImageView
+            android:id="@+id/add_comment_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_send"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/add_comment_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add_comment_edit_text"
+            app:tint="@color/primaryColor" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

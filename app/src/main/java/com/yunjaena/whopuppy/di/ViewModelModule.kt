@@ -6,6 +6,7 @@ import com.yunjaena.whopuppy.viewmodel.ArticleViewModel
 import com.yunjaena.whopuppy.viewmodel.BoardListViewModel
 import com.yunjaena.whopuppy.viewmodel.BreedCheckViewModel
 import com.yunjaena.whopuppy.viewmodel.ChatListViewModel
+import com.yunjaena.whopuppy.viewmodel.CommentViewModel
 import com.yunjaena.whopuppy.viewmodel.DogImageUploadViewModel
 import com.yunjaena.whopuppy.viewmodel.FindPasswordViewModel
 import com.yunjaena.whopuppy.viewmodel.HomeViewModel
@@ -30,6 +31,7 @@ val viewModelModule = module {
     viewModel { DogImageUploadViewModel(get()) }
     viewModel { BreedCheckViewModel(get()) }
     viewModel { BoardListViewModel(get()) }
+    viewModel { CommentViewModel(get(), get()) }
     viewModel { ArticleViewModel(get(), get()) }
     viewModel { ChatListViewModel(get(), get()) }
 }

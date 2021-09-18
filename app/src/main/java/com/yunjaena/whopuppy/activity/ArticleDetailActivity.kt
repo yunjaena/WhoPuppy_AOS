@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.adapter.ImageSliderAdapter
 import com.yunjaena.whopuppy.base.activity.ViewBindingActivity
+import com.yunjaena.whopuppy.base.dpToPx
 import com.yunjaena.whopuppy.base.fadeInAnimation
 import com.yunjaena.whopuppy.base.fadeOutAnimation
 import com.yunjaena.whopuppy.base.showAlertDialog
@@ -25,6 +26,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.max
 
 class ArticleDetailActivity : ViewBindingActivity<ActivityArticleDetailBinding>() {
     override val layoutId: Int = R.layout.activity_article_detail
@@ -63,7 +65,9 @@ class ArticleDetailActivity : ViewBindingActivity<ActivityArticleDetailBinding>(
         }
 
         binding.commentFloatingActionButton.setOnClickListener {
-            val height = binding.scrollView.height
+            val parentLayoutHeight = max(binding.parentLayout.height, binding.parentLayout.width)
+            val viewPagerHeight = 200.dpToPx()
+            val height = parentLayoutHeight - viewPagerHeight
             supportFragmentManager.showArticleCommentBottomSheetDialog(height, articleId)
         }
 
@@ -150,6 +154,7 @@ class ArticleDetailActivity : ViewBindingActivity<ActivityArticleDetailBinding>(
 
         binding.indicatorLinearLayout.visibility = View.VISIBLE
         val indicators: Array<ImageView> = Array(count) { ImageView(this) }
+        binding.indicatorLinearLayout.removeAllViews()
         for (i in indicators.indices) {
             binding.indicatorLinearLayout.addView(indicators[i])
         }

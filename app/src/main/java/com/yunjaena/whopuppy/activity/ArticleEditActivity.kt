@@ -1,5 +1,6 @@
 package com.yunjaena.whopuppy.activity
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.core.net.toUri
 import com.yunjaena.whopuppy.R
@@ -12,7 +13,6 @@ import com.yunjaena.whopuppy.dialog.AreaSelectorDialog
 import com.yunjaena.whopuppy.fragment.ArticleFragment
 import com.yunjaena.whopuppy.util.UpdateEvent
 import com.yunjaena.whopuppy.util.getEmojiFilter
-import com.yunjaena.whopuppy.util.goToArticleDetailActivity
 import com.yunjaena.whopuppy.util.showAreaSelectorDialog
 import com.yunjaena.whopuppy.util.showToast
 import com.yunjaena.whopuppy.viewmodel.ArticleViewModel
@@ -78,8 +78,11 @@ class ArticleEditActivity : ViewBindingActivity<ActivityArticleEditBinding>() {
 
     private fun initImageAddImageView() {
         binding.imageAddImageView.setOnClickListener {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             TedImagePicker.with(this)
-                .startMultiImage { uriList -> articleViewModel.addImageUri(uriList) }
+                .startMultiImage { uriList -> articleViewModel.addImageUri(uriList)
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+                }
         }
     }
 

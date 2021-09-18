@@ -1,25 +1,48 @@
 package com.yunjaena.whopuppy.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import com.yunjaena.whopuppy.R
 import com.yunjaena.whopuppy.base.activity.ViewBindingActivity
+import com.yunjaena.whopuppy.base.handleBackPressedListener
 import com.yunjaena.whopuppy.databinding.ActivityMainBinding
 import com.yunjaena.whopuppy.fragment.BoardListFragment
 import com.yunjaena.whopuppy.fragment.ChatListFragment
 import com.yunjaena.whopuppy.fragment.HomeFragment
 import com.yunjaena.whopuppy.fragment.MyPageFragment
+import com.yunjaena.whopuppy.util.showToast
 
 class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
     override val layoutId: Int = R.layout.activity_main
-
+    private var isBackButtonClicked = false
     private val fragmentMap = mutableMapOf<Int, Pair<Fragment, String>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
+        initBackPressed()
         if (savedInstanceState == null) {
             selectHomeFragment()
+        }
+    }
+
+    private fun initBackPressed() {
+        handleBackPressedListener(
+            onBackPressed = { goToHomeFragment() },
+            singleClickAction = { showToast(getString(R.string.press_back_button_to_exit)) },
+            doubleClickAction = { finish() }
+        )
+    }
+
+
+    private fun goToHomeFragment(): Boolean {
+        return if (binding.bottomNavigation.selectedItemId != R.id.action_home) {
+            selectHomeFragment()
+            true
+        } else {
+            false
         }
     }
 
@@ -66,5 +89,23 @@ class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
         transaction.setPrimaryNavigationFragment(primaryNavigationFragment)
         transaction.setReorderingAllowed(true)
         transaction.commitNowAllowingStateLoss()
+    }
+
+    override fun onBackPressed() {
+        if (binding.bottomNavigation.selectedItemId != R.id.action_home) {
+            selectHomeFragment()
+            return
+        }
+        handleBackPressed()
+    }
+
+    private fun handleBackPressed() {
+        if (isBackButtonClicked) {
+            finish()
+            return
+        }
+        this.isBackButtonClicked = true
+        showToast(getString(R.string.press_back_button_to_exit))
+        Handler(Looper.getMainLooper()).postDelayed({ isBackButtonClicked = false }, 2000)
     }
 }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.ArticleWriteActivity">
+
+        <EditText
+            android:id="@+id/title_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/input_title"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintEnd_toStartOf="@+id/content_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/boarder_title"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/primaryLightColor"
+            app:layout_constraintEnd_toStartOf="@+id/content_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_edit_text" />
+
+        <TextView
+            android:id="@id/area_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/select_area"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/content_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/boarder_title" />
+
+        <View
+            android:id="@+id/boarder_area"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/primaryLightColor"
+            app:layout_constraintEnd_toStartOf="@+id/content_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/area_text_view" />
+
+
+        <TextView
+            android:id="@+id/add_image_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/upload_image"
+            app:layout_constraintEnd_toEndOf="@+id/boarder_image"
+            app:layout_constraintEnd_toStartOf="@+id/content_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/boarder_area" />
+
+        <ImageView
+            android:id="@+id/image_add_image_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_dog_plus"
+            app:layout_constraintBottom_toBottomOf="@+id/image_recycler_view"
+            app:layout_constraintEnd_toStartOf="@+id/image_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/add_image_text_view"
+            app:layout_constraintTop_toTopOf="@+id/image_recycler_view" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/boarder_image"
+            app:layout_constraintEnd_toStartOf="@+id/content_edit_text"
+            app:layout_constraintStart_toEndOf="@id/image_add_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/add_image_text_view"
+            tools:listitem="@layout/item_image_upload" />
+
+
+        <View
+            android:id="@+id/boarder_image"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/primaryLightColor"
+            app:layout_constraintStart_toStartOf="@id/content_edit_text" />
+
+        <EditText
+            android:id="@+id/content_edit_text"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="@string/input_content"
+            android:padding="10dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

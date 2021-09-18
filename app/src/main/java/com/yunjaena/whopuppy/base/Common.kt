@@ -10,6 +10,8 @@ import android.content.res.Resources.getSystem
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.util.DisplayMetrics
@@ -18,6 +20,8 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.yunjaena.whopuppy.R
 
@@ -167,4 +171,33 @@ fun View.fadeOutAnimation(durationTime: Long = 300) {
                 visibility = View.GONE
             }
         })
+}
+
+fun Activity.getStatusBarHeight(): Int {
+    var result = 0
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId > 0) {
+        result = resources.getDimensionPixelSize(resourceId)
+    }
+    return result
+}
+
+
+fun AppCompatActivity.handleBackPressedListener(
+    interval: Long = 300L,
+    onBackPressed: (() -> Boolean)? = null,
+    singleClickAction: (() -> Unit)? = null,
+    doubleClickAction: (() -> Unit)? = null
+) {
+    var isBackPressed = false
+    onBackPressedDispatcher.addCallback(this) {
+        if (onBackPressed?.invoke() != true) return@addCallback
+        if (isBackPressed) {
+            doubleClickAction?.invoke()
+            return@addCallback
+        }
+        isBackPressed = true
+        singleClickAction?.invoke()
+        Handler(Looper.getMainLooper()).postDelayed({ isBackPressed = false }, interval)
+    }
 }
