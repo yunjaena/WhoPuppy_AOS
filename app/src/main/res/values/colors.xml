@@ -19,4 +19,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="chat_bubble_mine">#CEDE5A</color>
     <color name="chat_bubble_opponent">#8ABDE8</color>
+    <color name="red">#F44336</color>
 </resources>

@@ -7,9 +7,9 @@
 
         <variable
             name="vm"
-            type="com.yunjaena.whopuppy.viewmodel.MyInfoEditViewModel" />
+            type="com.dicelab.whopuppy.viewmodel.MyInfoEditViewModel" />
 
-        <import type="com.yunjaena.whopuppy.customview.ProgressStatus" />
+        <import type="com.dicelab.whopuppy.customview.ProgressStatus" />
 
         <import type="android.view.View" />
     </data>
@@ -70,7 +70,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.yunjaena.whopuppy.customview.StatusAnimationView
+        <com.dicelab.whopuppy.customview.StatusAnimationView
             android:id="@+id/user_nick_name_check_status_animation_view"
             android:layout_width="35dp"
             android:layout_height="35dp"

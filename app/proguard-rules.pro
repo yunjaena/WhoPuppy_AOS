@@ -49,7 +49,7 @@
 }
 
 # Data Model
--keep class com.yunjaena.whopuppy.data.**{*;}
+-keep class com.dicelab.whopuppy.data.**{*;}
 
 # Retrofit
 

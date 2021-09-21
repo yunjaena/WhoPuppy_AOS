@@ -55,6 +55,7 @@
             android:id="@+id/abandoned_dog_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             android:padding="20dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,13 +69,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
-            android:rotation="-90"
             android:backgroundTint="@color/primaryDarkColor"
-            app:borderWidth="0dp"
-            app:tint="@color/white"
+            android:rotation="-90"
             android:src="@drawable/ic_brown_arrow"
+            app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

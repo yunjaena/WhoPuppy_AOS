@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yunjaena.whopuppy">
+    package="com.dicelab.whopuppy">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".WhoPuppyApplication"
+        android:name="com.dicelab.whopuppy.WhoPuppyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:theme="@style/Theme.WhoPuppy"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.dicelab.whopuppy.activity.SplashActivity"
             android:theme="@style/Theme.WhoPuppy.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,32 +23,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ArticleDetailActivity"
+            android:name="com.dicelab.whopuppy.activity.ArticleDetailActivity"
             android:theme="@style/Theme.WhoPuppy.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".activity.ArticleWriteActivity" />
-        <activity android:name=".activity.ArticleEditActivity" />
-        <activity android:name=".activity.DogImageUploadActivity" />
+        <activity android:name="com.dicelab.whopuppy.activity.ArticleWriteActivity" />
+        <activity android:name="com.dicelab.whopuppy.activity.ArticleEditActivity" />
+        <activity android:name="com.dicelab.whopuppy.activity.DogImageUploadActivity" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.dicelab.whopuppy.activity.MainActivity"
             android:theme="@style/Theme.WhoPuppy.NoActionBar" />
         <activity
-            android:name=".activity.SignUpActivity"
+            android:name="com.dicelab.whopuppy.activity.SignUpActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.dicelab.whopuppy.activity.LoginActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
         <activity
-            android:name=".activity.FindPasswordActivity"
+            android:name="com.dicelab.whopuppy.activity.FindPasswordActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
         <activity
-            android:name=".activity.AbandonedAnimalSearchActivity"
+            android:name="com.dicelab.whopuppy.activity.AbandonedAnimalSearchActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents" />
-        <activity android:name=".activity.AbandonedAnimalDetailActivity" />
+        <activity android:name="com.dicelab.whopuppy.activity.AbandonedAnimalDetailActivity" />
         <activity
-            android:name=".activity.MyInfoEditActivity"
+            android:name="com.dicelab.whopuppy.activity.MyInfoEditActivity"
             android:theme="@style/Theme.WhoPuppy.MaterialComponents.ActionBar" />
-        <activity android:name=".activity.BreedCheckActivity" />
+        <activity android:name="com.dicelab.whopuppy.activity.BreedCheckActivity" />
     </application>
 
 </manifest>
