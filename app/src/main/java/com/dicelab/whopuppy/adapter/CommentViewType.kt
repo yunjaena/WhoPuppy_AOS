@@ -23,7 +23,6 @@ sealed class CommentViewType(val viewType: Int) {
                         .inflate(R.layout.item_comment_content, parent, false)
                     BindingViewHolder<ItemCommentContentBinding>(view)
                 }
-
             }
         }
     }

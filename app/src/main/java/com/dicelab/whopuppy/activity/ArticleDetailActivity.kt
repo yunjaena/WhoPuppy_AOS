@@ -20,7 +20,9 @@ import com.dicelab.whopuppy.databinding.ActivityArticleDetailBinding
 import com.dicelab.whopuppy.fragment.ArticleFragment
 import com.dicelab.whopuppy.util.UpdateEvent
 import com.dicelab.whopuppy.util.goToArticleEditActivity
+import com.dicelab.whopuppy.util.goToChattingActivity
 import com.dicelab.whopuppy.util.showArticleCommentBottomSheetDialog
+import com.dicelab.whopuppy.util.showToast
 import com.dicelab.whopuppy.viewmodel.ArticleViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -62,6 +64,11 @@ class ArticleDetailActivity : ViewBindingActivity<ActivityArticleDetailBinding>(
     private fun initFloatingActionButton() {
         setFloatingActionButtonAnimation()
         binding.messageFloatingActionButton.setOnClickListener {
+            if (articleViewModel.isArticleOwner) {
+                showToast(getString(R.string.write_owner))
+                return@setOnClickListener
+            }
+            goToChattingActivity(articleId = articleId)
         }
 
         binding.commentFloatingActionButton.setOnClickListener {

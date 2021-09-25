@@ -40,7 +40,6 @@ class AnimalRemoteDataSource(private val noAuthApi: NoAuthApi, private val authF
                 val breedAnalysisItem =
                     DogBreedAnalysis(breedItem[0].replace("\"", ""), breedItem[1].toFloat())
                 dogBreedAnalysisList.add(breedAnalysisItem)
-                Logger.d("NYJ $breedAnalysisItem")
             }
         return dogBreedAnalysisList
     }

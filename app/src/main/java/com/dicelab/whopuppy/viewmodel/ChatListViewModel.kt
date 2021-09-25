@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.dicelab.whopuppy.base.viewmodel.ViewModelBase
 import com.dicelab.whopuppy.data.ChatRepository
 import com.dicelab.whopuppy.data.ChatRoomModel
+import com.dicelab.whopuppy.data.Message
 import com.dicelab.whopuppy.data.UserRepository
 import com.dicelab.whopuppy.data.entity.toChatRoomModels
 import com.dicelab.whopuppy.util.retry
@@ -57,28 +58,6 @@ class ChatListViewModel(
         }
     }
 
-    fun sendMessage(chatRoomId: Int, message: String) {
-        viewModelScope.launch {
-            try {
-                val jsonString = Gson().toJson(Message(chatRoomId, message))
-                Logger.d("NYJ $jsonString")
-                chatRepository.sendMessage("/pub/chat/message", jsonString)
-            } catch (e: Exception) {
-                Logger.e(e.message ?: "")
-            }
-        }
-    }
-
-    fun readMessage(messageId: Int) {
-        viewModelScope.launch {
-            try {
-                chatRepository.sendMessage("/pub/chat/message/$messageId")
-            } catch (e: Exception) {
-                Logger.e(e.message ?: "")
-            }
-        }
-    }
-
     fun disConnectChatServer() {
         viewModelScope.launch {
             subscribeJob?.cancelChildren()
@@ -102,8 +81,3 @@ class ChatListViewModel(
         }
     }
 }
-
-data class Message(
-    val chatRoomId: Int,
-    val message: String
-)

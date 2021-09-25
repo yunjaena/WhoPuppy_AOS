@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentManager
 import com.dicelab.whopuppy.data.Area
 import com.dicelab.whopuppy.dialog.AbandonedDogSortDialog
 import com.dicelab.whopuppy.dialog.AreaSelectorDialog
+import com.dicelab.whopuppy.dialog.TitleInputDialog
 import com.dicelab.whopuppy.fragment.ArticleCommentBottomSheetFragment
 import com.dicelab.whopuppy.fragment.ArticleCommentWriteBottomSheetFragment
 
@@ -41,6 +42,13 @@ fun FragmentManager.showArticleCommentWriteBottomSheetDialog(
 ) {
     val tag = ArticleCommentWriteBottomSheetFragment.TAG
     val dialog = ArticleCommentWriteBottomSheetFragment.newInstance(articleId, profileUrl)
+    if (findFragmentByTag(tag) != null || isDestroyed) return
+    dialog.showNow(this, tag)
+}
+
+fun FragmentManager.showTitleInputDialog() {
+    val tag = TitleInputDialog.TAG
+    val dialog = TitleInputDialog.newInstance()
     if (findFragmentByTag(tag) != null || isDestroyed) return
     dialog.showNow(this, tag)
 }

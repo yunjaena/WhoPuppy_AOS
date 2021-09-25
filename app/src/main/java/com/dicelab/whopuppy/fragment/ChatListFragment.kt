@@ -12,6 +12,7 @@ import com.dicelab.whopuppy.R
 import com.dicelab.whopuppy.adapter.ChatListAdapter
 import com.dicelab.whopuppy.base.fragment.ViewBindingFragment
 import com.dicelab.whopuppy.databinding.FragmentChatListBinding
+import com.dicelab.whopuppy.util.goToChattingActivity
 import com.dicelab.whopuppy.viewmodel.ChatListViewModel
 import com.orhanobut.logger.Logger
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,6 +42,8 @@ class ChatListFragment : ViewBindingFragment<FragmentChatListBinding>() {
     }
 
     private fun init() {
+        binding.vm = chatListViewModel
+        binding.chatTextView.setOnClickListener {}
         connectivityManager =
             requireContext().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         initView()

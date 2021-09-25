@@ -1,6 +1,9 @@
 package com.dicelab.whopuppy.data
 
+import com.dicelab.whopuppy.data.entity.ChatMessage
 import com.dicelab.whopuppy.data.entity.ChatRoom
+import com.dicelab.whopuppy.data.entity.ChatRoomCreateItem
+import com.dicelab.whopuppy.data.entity.ChatRoomItem
 import kotlinx.coroutines.flow.Flow
 import org.hildan.krossbow.stomp.frame.StompFrame
 
@@ -30,5 +33,21 @@ class ChatRepository(
 
     override suspend fun getChatRooms(): ChatRoom {
         return chatRemoteDataSource.getChatRooms()
+    }
+
+    override suspend fun getChatRoomDetail(roomId: Long): ChatRoomItem {
+        return chatRemoteDataSource.getChatRoomDetail(roomId)
+    }
+
+    override suspend fun getRecentChatMessage(
+        count: Int,
+        id: Long,
+        roomId: Long
+    ): ArrayList<ChatMessage> {
+        return chatRemoteDataSource.getRecentChatMessage(count, id, roomId)
+    }
+
+    override suspend fun createChatRoom(chatRoomCreateItem: ChatRoomCreateItem): Long {
+        return chatRemoteDataSource.createChatRoom(chatRoomCreateItem)
     }
 }

@@ -3,6 +3,7 @@ package com.dicelab.whopuppy.data.entity
 data class ChatRoomItem(
     val articleId: Long? = 0,
     val chatMessage: ChatMessage? = ChatMessage(),
+    val article: ArticleItem? = ArticleItem(),
     val createUserId: Long? = 0,
     val createdAt: String? = "",
     val id: Long? = 0,

@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dicelab.whopuppy.viewmodel.ChatListViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -11,8 +20,8 @@
             android:id="@+id/chat_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/chatting"
             android:textColor="@color/primaryTextColor"
             android:textSize="20sp"
@@ -26,10 +35,44 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:overScrollMode="never"
+            android:visibility="@{vm.chatRoomList != null &amp;&amp; vm.chatRoomList.size() > 0 ? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chat_text_view"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/item_chat_list" />
 
+        <ImageView
+            android:id="@+id/empty_chat_list_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_dog_paw"
+            app:layout_constraintBottom_toTopOf="@+id/empty_chat_list_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat_text_view"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/empty_chat_list_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/start_new_chatting"
+            android:textSize="15sp"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_chat_list_image_view" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/chat_empty_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.chatRoomList != null &amp;&amp; vm.chatRoomList.size() > 0 ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="empty_chat_list_image_view, empty_chat_list_text_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

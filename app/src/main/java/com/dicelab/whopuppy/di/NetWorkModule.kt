@@ -74,6 +74,7 @@ val netWorkModule = module {
 
     factory(named(REFRESH_AUTH)) {
         get<OkHttpClient.Builder>().apply {
+            authenticator(Authenticator.NONE)
             addInterceptor { chain ->
                 val refreshToken = Hawk.get(REFRESH_TOKEN, "")
                 Logger.d("refresh token : $refreshToken")

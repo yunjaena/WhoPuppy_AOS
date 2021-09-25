@@ -3,7 +3,11 @@ package com.dicelab.whopuppy.api
 import com.dicelab.whopuppy.data.entity.ArticleItem
 import com.dicelab.whopuppy.data.entity.Articles
 import com.dicelab.whopuppy.data.entity.Boards
+import com.dicelab.whopuppy.data.entity.ChatMessage
 import com.dicelab.whopuppy.data.entity.ChatRoom
+import com.dicelab.whopuppy.data.entity.ChatRoomCreateItem
+import com.dicelab.whopuppy.data.entity.ChatRoomCreateResponse
+import com.dicelab.whopuppy.data.entity.ChatRoomItem
 import com.dicelab.whopuppy.data.entity.CommentItem
 import com.dicelab.whopuppy.data.entity.Comments
 import com.dicelab.whopuppy.data.entity.User
@@ -88,4 +92,17 @@ interface AuthApi {
 
     @GET("/chat/rooms")
     suspend fun getChatRooms(): ChatRoom
+
+    @GET("/chat/room/{roomId}")
+    suspend fun getChatRoomDetail(@Path("roomId") roomId: Long): ChatRoomItem
+
+    @GET("/chat/room/{roomId}/message")
+    suspend fun getRecentChatMessage(
+        @Path("roomId") roomId: Long,
+        @Query("count") count: Int,
+        @Query("id") id: Long,
+    ): ArrayList<ChatMessage>
+
+    @POST("/chat/room")
+    suspend fun postChatRoom(@Body chatRoomCreateItem: ChatRoomCreateItem): ChatRoomCreateResponse
 }

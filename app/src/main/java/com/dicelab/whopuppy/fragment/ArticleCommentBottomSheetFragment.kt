@@ -98,7 +98,6 @@ class ArticleCommentBottomSheetFragment : BottomSheetDialogFragment() {
         val bottomSheet = dialog?.findViewById<View>(R.id.design_bottom_sheet)
         bottomSheet?.let { sheet ->
             val height = getDialogHeight()
-            Logger.d("NYJ height : $height")
             val dialog = dialogInterface as BottomSheetDialog
             dialog.behavior.peekHeight = height
             sheet.parent.parent.requestLayout()

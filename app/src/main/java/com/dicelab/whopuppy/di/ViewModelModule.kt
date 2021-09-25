@@ -6,6 +6,7 @@ import com.dicelab.whopuppy.viewmodel.ArticleViewModel
 import com.dicelab.whopuppy.viewmodel.BoardListViewModel
 import com.dicelab.whopuppy.viewmodel.BreedCheckViewModel
 import com.dicelab.whopuppy.viewmodel.ChatListViewModel
+import com.dicelab.whopuppy.viewmodel.ChatRoomViewModel
 import com.dicelab.whopuppy.viewmodel.CommentViewModel
 import com.dicelab.whopuppy.viewmodel.DogImageUploadViewModel
 import com.dicelab.whopuppy.viewmodel.FindPasswordViewModel
@@ -34,4 +35,5 @@ val viewModelModule = module {
     viewModel { CommentViewModel(get(), get()) }
     viewModel { ArticleViewModel(get(), get()) }
     viewModel { ChatListViewModel(get(), get()) }
+    viewModel { ChatRoomViewModel(get(), get(), get()) }
 }

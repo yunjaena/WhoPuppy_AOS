@@ -10,6 +10,7 @@ import com.dicelab.whopuppy.R
 import com.dicelab.whopuppy.base.recyclerview.BindingViewHolder
 import com.dicelab.whopuppy.data.ChatRoomModel
 import com.dicelab.whopuppy.databinding.ItemChatListBinding
+import com.dicelab.whopuppy.util.goToChattingActivity
 
 class ChatListAdapter : RecyclerView.Adapter<BindingViewHolder<ItemChatListBinding>>() {
     private val chatRoomModels = arrayListOf<ChatRoomModel>()
@@ -51,6 +52,10 @@ class ChatListAdapter : RecyclerView.Adapter<BindingViewHolder<ItemChatListBindi
             } else {
                 messageCountTextView.visibility = View.INVISIBLE
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            holder.itemView.context.goToChattingActivity(roomId = item.roomId)
         }
     }
 

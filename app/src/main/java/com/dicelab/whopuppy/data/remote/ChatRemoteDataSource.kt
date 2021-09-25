@@ -5,7 +5,10 @@ import com.dicelab.whopuppy.constant.ACCESS_TOKEN
 import com.dicelab.whopuppy.constant.PRODUCTION_SERVER_BASE_URL
 import com.dicelab.whopuppy.constant.PRODUCTION_SOCKET_URL
 import com.dicelab.whopuppy.data.ChatDataSource
+import com.dicelab.whopuppy.data.entity.ChatMessage
 import com.dicelab.whopuppy.data.entity.ChatRoom
+import com.dicelab.whopuppy.data.entity.ChatRoomCreateItem
+import com.dicelab.whopuppy.data.entity.ChatRoomItem
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -50,12 +53,27 @@ class ChatRemoteDataSource(
         try {
             session?.disconnect()
         } catch (e: Exception) {
-
         }
     }
 
     override suspend fun getChatRooms(): ChatRoom {
         return authApi.getChatRooms()
+    }
+
+    override suspend fun getChatRoomDetail(roomId: Long): ChatRoomItem {
+        return authApi.getChatRoomDetail(roomId)
+    }
+
+    override suspend fun getRecentChatMessage(
+        count: Int,
+        id: Long,
+        roomId: Long
+    ): ArrayList<ChatMessage> {
+        return authApi.getRecentChatMessage(roomId, count, id)
+    }
+
+    override suspend fun createChatRoom(chatRoomCreateItem: ChatRoomCreateItem): Long {
+        return authApi.postChatRoom(chatRoomCreateItem).id
     }
 
     private fun getHeader(): Map<String, String> {

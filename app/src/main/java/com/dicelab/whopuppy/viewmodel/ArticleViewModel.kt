@@ -73,7 +73,6 @@ class ArticleViewModel(
     private fun getArticleList() {
         val query = articleQuery
         if (query?.boardId == null) return
-        Logger.d("NYJ query ${query.area}")
         communityRepository.getArticles(
             query.boardId!!,
             query.limit,
