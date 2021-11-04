@@ -61,13 +61,23 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private fun initMyChat(binding: ItemChatMineBinding, item: ChatModel) {
         if (item !is MyChatText) return
-        binding.chatTextView.text = item.message
+        val text = if (item.message == "<!HELLO!>") {
+            binding.root.context.getString(R.string.hello_emoji)
+        } else {
+            item.message
+        }
+        binding.chatTextView.text = text
         binding.timeTextView.text = item.createdAt
     }
 
     private fun initOpponentChat(binding: ItemChatOpponentBinding, item: ChatModel) {
         if (item !is OpponentText) return
-        binding.chatTextView.text = item.message
+        val text = if (item.message == "<!HELLO!>") {
+            binding.root.context.getString(R.string.hello_emoji)
+        } else {
+            item.message
+        }
+        binding.chatTextView.text = text
         binding.timeTextView.text = item.createdAt
 
         Glide.with(binding.root.context)

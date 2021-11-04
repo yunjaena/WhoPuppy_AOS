@@ -40,10 +40,15 @@ class ChatListAdapter : RecyclerView.Adapter<BindingViewHolder<ItemChatListBindi
                 .error(R.drawable.ic_brown_dog)
                 .into(profileImageView)
 
+            val text = if (item.content == "<!HELLO!>") {
+                holder.itemView.context.getString(R.string.hello_emoji)
+            } else {
+                item.content
+            }
 
             titleTextView.text = item.title
             dateTextView.text = item.updateDate
-            contentTextView.text = item.content
+            contentTextView.text = text
 
             if (item.messageCount > 0) {
                 messageCountTextView.visibility = View.VISIBLE

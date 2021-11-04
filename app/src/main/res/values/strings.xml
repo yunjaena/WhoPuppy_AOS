@@ -98,4 +98,5 @@
     <string name="input_chat_room_title">채팅방 제목을 입력해주세요.</string>
     <string name="write_owner">사용자가 작성하신 글입니다.</string>
     <string name="error">오류가 발생했습니다.</string>
+    <string name="hello_emoji">👋</string>
 </resources>

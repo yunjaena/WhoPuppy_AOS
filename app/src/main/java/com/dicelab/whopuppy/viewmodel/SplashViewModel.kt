@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dicelab.whopuppy.base.viewmodel.ViewModelBase
 import com.dicelab.whopuppy.data.UserRepository
 import com.dicelab.whopuppy.util.withThread
+import io.reactivex.rxjava3.kotlin.addTo
 
 class SplashViewModel(
     private val userRepository: UserRepository
@@ -20,6 +21,6 @@ class SplashViewModel(
                 _isLoginSuccess.value = true
             }) {
                 _isLoginSuccess.value = false
-            }
+            }.addTo(compositeDisposable)
     }
 }
